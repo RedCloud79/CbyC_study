@@ -224,14 +224,45 @@ int main(void) {
 2
 3
 ------------------------------------------------------------------------
+* 동작 묶기 1 : 함수
+int add(int a, int b) {
+	return a + b;
+}
+int main(void) {
+	int a = 1, b = 2;
+	int c = add(a, b);
+	printf("%d\n", c);
 
+}
+*결과값
+3
+------------------------------------------------------------------------
+* 동작 묶기 2 : 함수
+int is_adult(int age) {
+	return age >= 19; // True=(1), False=(0)
+}
+int main(void) {
+	int my_age = 17;
+	printf("%d\n",is_adult(my_age));
 
+}
+*결과값
+0
+-------------------------------------------------------------------------
+* 변수 붂기 : struct 구조체 만들기
+struct Student {
+	char name[20];
+	int age;
 
-
-
-
-
-
+};
+int main(void) {
+	struct Student student_1 = { "Brad", 21 };
+	printf("%s\n", student_1.name);
+	printf("%d\n", student_1.age);
+}
+* 결과값
+Brad
+21
 
 
 
