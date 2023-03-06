@@ -18,6 +18,7 @@ int main(void) {
 Be happy! 2034계속하려면 아무 키나 누르십시오 . . .
 */
 
+* c의 값의 종류
 #include <stdio.h>
 int main(void) {
 	printf("%d\n", 3); // 정수값 int <- integer
@@ -33,11 +34,70 @@ int main(void) {
 3
 a
 
+* 값으로 하는 일 : 사칙연산, module(%)
+#include <stdio.h>
+int main(void) {
+	printf("%d\n",3 + 4);
+	printf("%d\n", 3 - 4);
+	printf("%d\n", 3 * 4);
+	printf("%d\n", 3 / 4); // 정수 : 몫
+	printf("%lf\n", 3.0 / 4); //실수 : 몫과 나머지의 끝까지표기
+	printf("%d\n", 3 % 4); // 나머지
+}
+* 결과값
+7
+-1
+12
+0
+0.750000
+3
 
+* 값으로 하는 일 : 비교 연산
+int main(void) {
+	printf("%d\n", 3 > 4); // 0이면 False, 1이면 True
+	printf("%d\n", 3 >= 4);
+	printf("%d\n", 3 < 4);
+	printf("%d\n", 3 <= 4);
+	printf("%d\n", 3 == 4);
+	printf("%d\n", 3 != 4);
+}
+*결과값
+0
+0
+1
+1
+0
+1
 
+* 값으로 하는 일 : 논리 연산
+int main(void) {
+	printf("%d\n", 3 > 4 && 5 > 6); // and 논리 곱
+	printf("%d\n", 3 < 4 && 5 < 6);
+	printf("%d\n", 3 > 4 || 5 > 6); // or 논리 합
+	printf("%d\n", 3 < 4 || 5 < 6);
+	printf("%d\n", !(3 < 4)); // not 논리 부정
+	printf("%d\n", !(3 > 4));
+}
+* 결과값
+0
+1
+0
+1
+0
+1
 
+* 값의 그릇 : 변수, 값을 담기 : 할당
+int main(void) {
+	int a = 3;
+	int b = 4;
+	printf("%d\n", a+b);
 
-
+	int c = a + b;
+	printf("%d\n", c);
+}
+*결과값
+7
+7
 
 
 
