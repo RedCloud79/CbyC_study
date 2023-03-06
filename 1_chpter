@@ -138,10 +138,49 @@ int main(void) {
 *결과값
 Z generation
 ---------------------------------------------------------------------
-
-
-
-
+* 동작 반복하기 : while
+int main(void) {
+	int c_level = 0;
+	while (c_level < 10) {
+		printf("study c\n");
+		c_level++; //c_level += 1; 같은 의미 이다.
+	}
+}
+*결과값
+study c
+study c
+study c
+study c
+study c
+study c
+study c
+study c
+study c
+study c
+-----------------------------------------------------------------------
+* 동작 반복하기 : while-if-break
+int main(void) {
+	int c_level = 0;
+	while (1) { //True
+		printf("study c \n");
+		c_level++;
+		if (c_level >= 10) {
+			break;
+		}
+	}
+}
+*결과값
+study c
+study c
+study c
+study c
+study c
+study c
+study c
+study c
+study c
+study c
+----------------------------------------------------------------------
 
 
 
