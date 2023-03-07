@@ -1,1 +1,187 @@
-# C.study
+## 복습하기
+ex_1)
+#if 1
+#include <stdio.h>
+#include <math.h>
+
+int main(void) {
+	printf("%d\n", 3 + 4);
+	printf("%d\n", 3 - 4);
+	printf("%d\n", 3 * 4);
+	printf("%d\n", 3 / 4);
+	printf("%f\n", 3.0 / 4);
+	printf("%d\n", 3 % 4);
+	printf("%lf\n", pow(3,  4)); // 거듭제곱의 형태
+}
+#endif
+
+#if 1
+#include <stdio.h>
+#include <math.h>
+
+int main(void) {
+	printf("%d\n", 3 > 4);
+	printf("%d\n", 3 >= 4);
+	printf("%d\n", 3 < 4);
+	printf("%d\n", 3 <= 4);
+	printf("%d\n", 3 == 4);
+	printf("%d\n", 3 != 4);
+}
+#endif
+
+#if 1
+#include <stdio.h>
+#include <math.h>
+
+int main(void) {
+	printf("%d\n", 3 > 4 && 5 > 6); // and 논리 곱
+	printf("%d\n", 3 < 4 && 5 < 6);
+	printf("%d\n", 3 > 4 || 5 > 6); // or 논리 합
+	printf("%d\n", 3 < 4 || 5 < 6);
+	printf("%d\n", !(3 < 4)); // not 논리 부정
+	printf("%d\n", !(3 > 4));
+}
+#endif
+
+#if 1
+#include <stdio.h>
+#include <math.h>
+
+int main(void) {
+	int a = 3;
+	int b = 4;
+	printf("%d\n", (a + b));
+	int c = a + b;
+	printf("%d\n", c);
+}
+#endif
+
+#if 1
+#include <stdio.h>
+#include <math.h>
+
+int main(void) {
+	int birth_year = 2004;
+	if (birth_year>=1981 && birth_year <=  1996) {
+		printf("adult\n");
+	}
+	else if(birth_year >= 1996 && birth_year <= 2012) {
+		printf("miner\n");
+	}
+	else {
+		printf("???\n");
+	}
+}
+#endif
+
+#if 1
+#include <stdio.h>
+#include <math.h>
+
+
+int main(void) {
+	int c_level = 0;
+	while (c_level < 100000) {
+	printf("study c ");
+	c_level++;
+	printf("%d\n", c_level);
+}
+}
+#endif
+
+#if 1
+#include <stdio.h>
+#include <math.h>
+
+
+int main(void) {
+	int c_level = 0;
+	while (1) {
+		c_level++;
+		if (c_level >= 10) {
+			printf("study c ");
+			printf("%d\n", c_level);
+			break;
+		}
+	}
+}
+#endif
+
+#if 1
+#include <stdio.h>
+#include <math.h>
+
+
+int main(void) {
+	int cnt = 0;
+	int eggs[4] = { 0, 1, 2, 3 };
+	/*for (int i = 0; i < 4; i++) {
+		printf("%d\n", eggs[i]);
+	}*/
+	int i = 0;
+	for (; i < 4; i++) {
+		printf("%d\n", eggs[i]);
+	}
+	eggs[2] = 7;
+	printf("%d\n", eggs[2]);
+}
+#endif
+-------------------------------------------------------------
+## 바뀌지 않는 문자열 형태의 리스트 받아서 출력
+@'*'의 의미는 포인터 = 화살표(지시자)라는 의미
+#if 1
+#include <stdio.h>
+#include <math.h>
+
+
+int main(void) {
+	const char* eggs[4] = {"egg0", "egg1","egg2", "egg3"};
+	for (int i = 0; i < 4; i++) {
+		printf("%s\n", eggs[i]);
+	}
+}
+#endif
+-------------------------------------------------------------
+#if 1
+#include <stdio.h>
+#include <math.h>
+struct Student
+{
+	char name[20];
+	int age;
+};
+int main(void) {
+	struct Student s2 = { "bred", 21};
+	struct Student s3 = { "jane", 24 };
+	printf("%s\n", s2.name);
+	printf("%d\n", s2.age);
+	printf("%s\n", s3.name);
+	printf("%d\n", s3.age);
+}
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
