@@ -160,7 +160,38 @@ int main(void) {
 }
 #endif
 
+## def와 같은 표현의 코드
+#if 1
+#include <stdio.h>
+#include <math.h>
+struct Student
+{
+	char name[20];
+	int age;
+};
+char * getName(struct Student inst) {
+	return inst.name;
+}
+int getAge(struct Student inst) {
+	return inst.age;
+}
+void setAge(struct Student * inst, int newAge) {
+	inst->age = newAge; // -> 주소값 변수
+}
+int main(void) {
+	struct Student s2 = { "bred", 21};
+	struct Student s3 = { "jane", 24 };
+	printf("%s\n", s2.name);
+	printf("%d\n", s2.age);
+	printf("%s\n", s3.name);
+	printf("%d\n", s3.age);
 
+	printf("%s\n", getName(s3));
+	printf("%d\n", getAge(s3));
+	setAge(&s3, getAge(s3) + 1);
+	printf("%d\n", getAge(s3));
+}
+#endif
 
 
 
