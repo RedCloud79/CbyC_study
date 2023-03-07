@@ -268,24 +268,12 @@ int main(void) {
 #include <stdio.h>
 #include <math.h>
 int main(void) {
-	printf("%d\n", 12);
-	printf("%d\n", 014);
-	printf("%d\n", 0xa);
+	printf("%d\n", 12); // 갯수, 횟수 용도 사칙연산 (10진수)
+	printf("%d\n", 014); // 유닉스 퍼미션 표현을 위해
+	printf("%d\n", 0xa); // 켜고, 끄고 스위치형태 하드웨어 제어(2진수 대용 16진수)&,|,~,^,<<,>>
 	return 0;
 }
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
