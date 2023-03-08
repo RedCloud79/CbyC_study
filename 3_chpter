@@ -1,3 +1,4 @@
+# 16진수 => 2진수 표기법
 0 1 2 3 4 ... 9 A B C D E F
 F <=> 1111 0 <=> 0000 0xEF <=> 11101111
 E <=> 1110 1 <=> 0001
@@ -7,6 +8,7 @@ B <=> 1011 4 <=> 0100
 A <=> 1010 5 <=> 0101
 9 <=> 1001 6 <=> 0110
 8 <=> 1000 7 <=> 0111
+
 4비트 표현 숫자 가지수 : 16가지 : 0~15(2^4-1)
 16/2=8 -8~8-1(-2^3~2^3-1)
 8비트(1B) : 16*16 = 256 = 2^8 : 0~2^8-1(unsigned char)
@@ -69,7 +71,7 @@ int main(void) {
 	float ft = 1.2345678901234567890;
 	double db = 1.12345678901234567890;
 
-	printf("float형 변수 출력 : %.20f\n", ft);
+	printf("float형 변수 출력 : %.20f\n", ft); // 소숫점 20자리 수까지 
 	printf("double형 변수 출력 : %.20f\n", db);
 	return 0;
 }
@@ -226,8 +228,8 @@ int main(void) {
 	int a = 5, b = 5;
 	int pre, post;
 
-	pre = (++a) * 3;
-	post = (b++) * 3;
+	pre = (++a) * 3; // 선처리로 인해 18의 값을 
+	post = (b++) * 3; //출력후에 b의 값의 형태변환 * 15의 값이 출력된후 6으로 변환
 
 	printf("초깃값 a = %d, b = %d\n", a, b);
 	printf("전위형: (++a) * 3 = %d, 후위형: (b++) * 3 = %d\n", pre, post);
@@ -273,7 +275,7 @@ int main(void) {
 	int a = 20, b = 3;
 	double res;
 
-	res = ((double)a) / ((double)b);
+	res = ((double)a) / ((double)b); // int값을 double의 형태로 변환이 가능하다.
 	printf("a = %d, b = %d\n", a, b);
 	printf("a / b의 결과 : %.1lf\n", res);
 
@@ -329,7 +331,7 @@ void int2bin(int number) {
 	for (int i = 31; i >= 0; i--) {
 		if ((number & (1 << i)) == 0) printf("0");
 		else printf("1");
-		//printf("%d",(number &(1 <<i)) == 0?0:1);
+		//printf("%d",(number &(1 <<i)) == 0?0:1); //삼항연산자 처리시 활용
 		if (i% 8 == 0 && i != 0) printf(" ");
 	}
 	printf("\n");
