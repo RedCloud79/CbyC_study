@@ -145,21 +145,144 @@ int main(void) {
 }
 #endif
 ---------------------------------------------------------------
+#if 1
+
+#include <stdio.h>
+#include <string.h>
 
 
+int main(void) {
+	int a;
+
+	scanf("%d", &a); //&는 주소값을 지정(변수 앞에 붙인다), scanf는 입력값을 받음,'&'빠지면 실행 안됨
+	printf("입력된 값 : %d\n", a);
+}
+#endif
+----------------------------------------------------------------
+#if 1
+
+#include <stdio.h>
+#include <string.h>
 
 
+int main(void) {
+	int age;
+	double height;
+
+	printf("나이와 키를 입력하세요 : ");
+	scanf("%d%lf", &age, &height); //&는 주소값을 지정, scanf는 입력값을 받음
+	printf("나이는 %d살, 키는 %.1lfcm 입니다.\n", age, height);
+}
+#endif
+----------------------------------------------------------------
+#if 1
+
+#include <stdio.h>
+#include <string.h>
 
 
+int main(void) {
+	char grade;
+	char name[20];
+
+	printf("학점 입력 : ");
+	scanf("%c", &grade);
+	printf("이름 입력 : ");
+	scanf("%s", name); // name 배열네 이름 문자열 입력, &를 사용하지 않는다.(배열이기 때문에)
+	printf("%s의 학점은 %c입니다.\n", name, grade);
+	
+}
+#endif
+----------------------------------------------------------------
+#if 1
+
+#include <stdio.h>
+#include <string.h>
 
 
+int main(void) {
+	double apple;
+	int banana;
+	int orange;
+
+	apple = 5.0 / 2.0;
+	banana = 5 / 2;
+	orange = 5 % 2;
+
+	printf("apple : %.1lf\n", apple);
+	printf("banana : %d\n", banana);
+	printf("orange : %d\n", orange);
+
+}
+#endif
+--------------------------------------------------------------
+#if 1
+
+#include <stdio.h>
+#include <string.h>
 
 
+int main(void) {
+	int a = 5, b = 5;
+	int pre, post;
+
+	pre = (++a) * 3;
+	post = (b++) * 3;
+
+	printf("초깃값 a = %d, b = %d\n", a, b);
+	printf("전위형: (++a) * 3 = %d, 후위형: (b++) * 3 = %d\n", pre, post);
+	printf("후형 : %d\n", b);
+
+	int d = 5;
+	int e = d++;
+	printf("%d\n", e);
+	printf("%d\n", d);
+
+	return  0;
+}
+#endif
+---------------------------------------------------------------
+#if 1
+
+#include <stdio.h>
+#include <string.h>
 
 
+int main(void) {
+	int a = 30;
+	int res;
+
+	res = (a > 10) && (a < 20);
+	printf("(a > 10) && (a < 20) : %d\n", res);
+	res = (a < 10) || (a > 20);
+	printf("(a > 10) || (a > 20) : %d\n", res);
+	res = !(a >= 30);
+	printf("! (a >= 30) : %d\n", res);
+
+	return  0;
+}
+#endif
+---------------------------------------------------------------
+#if 1
+
+#include <stdio.h>
+#include <string.h>
 
 
+int main(void) {
+	int a = 20, b = 3;
+	double res;
 
+	res = ((double)a) / ((double)b);
+	printf("a = %d, b = %d\n", a, b);
+	printf("a / b의 결과 : %.1lf\n", res);
+
+	a = (int)res;
+	printf("(int) %.1lf의 결과 : %d\n", res, a);
+	return  0;
+}
+#endif
+----------------------------------------------------------------
 
 
 
