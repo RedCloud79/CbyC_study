@@ -80,7 +80,7 @@ int main(void) {
 
 int main(void) {
 	char fruit[20] = "strawberry"; //char 배열 선언과 문자열 초기화
-								   //char 배열명[문자길이+1] = 문자열;의 형태
+				       //char 배열명[문자길이+1] = 문자열;의 형태
 
 	printf("딸기 : %s\n", fruit);
 	printf("딸기쨈 : %s %s\n", fruit, "jam");
@@ -112,6 +112,12 @@ int main(void) {
 	}
 	fruit[i] = '\0';
 	printf("%s\n", fruit);
+	int a = 0;
+	for (;; a++) {
+		fruit[a] = "pine apple"[a];
+		if (fruit[a] = '\0') break;
+	}
+	printf("%s\n", fruit);
 	for (int i = 0; i < 20; i++) {
 		if(i<11) printf("%c ", fruit[i]);
 		else printf("%d ", fruit[i]);
@@ -121,8 +127,24 @@ int main(void) {
 #endif
 @ 컴파일 오류시 #define _CRT_SECURE_NO_WARNINGS추가
 --------------------------------------------------------------
+#if 1
+
+#include <stdio.h>
+#include <string.h>
 
 
+int main(void) {
+	int income = 0;
+	double tax;
+	const double tax_rate = 0.12; //const 변수의 이름을 주는방법
+
+	income = 456;
+	tax = income * tax_rate;
+	printf("세금은 : %.1lf입니다.\n", tax);
+	return 0;
+}
+#endif
+---------------------------------------------------------------
 
 
 
