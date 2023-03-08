@@ -283,10 +283,43 @@ int main(void) {
 }
 #endif
 ----------------------------------------------------------------
+#if 1
+
+#include <stdio.h>
+#include <string.h>
 
 
+int main(void) {
+	int a = 10, b = 20, res;
+
+	res = (a > b) ? a : b;// ?(if):(else)형태의 삼항연산자
+			      // python : res=a if a>b else b
+	printf("큰 값 : %d\n", res);
+
+	return  0;
+}
+#endif
+---------------------------------------------------------------
+#if 1
+
+#include <stdio.h>
+#include <string.h>
 
 
+int main(void) {
+	int a = 10, b = 12;
+
+	printf("a & b : %d\n", a & b); // 비트별 and
+	printf("a ^ b : %d\n", a ^ b); // 비트별 exclusive or
+	printf("a | b : %d\n", a | b); // 비트별 or
+	printf("~a : %d\n", ~a); // 비트별 not
+	printf("a << 1 : %d\n", a << 1); // 비트별 shift 밀어주는것(왼쪽으로)
+	printf("a >> 2 : %d\n", a >> 2); // 비트별 shift 밀어주는것(오른쪽으로)
+
+	return  0;
+}
+#endif
+---------------------------------------------------------------
 
 
 
