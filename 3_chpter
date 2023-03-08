@@ -320,14 +320,32 @@ int main(void) {
 }
 #endif
 ---------------------------------------------------------------
+#if 1
 
+#include <stdio.h>
+#include <string.h>
 
+void int2bin(int number) {
+	for (int i = 31; i >= 0; i--) {
+		if ((number & (1 << i)) == 0) printf("0");
+		else printf("1");
+		//printf("%d",(number &(1 <<i)) == 0?0:1);
+		if (i% 8 == 0 && i != 0) printf(" ");
+	}
+	printf("\n");
+}
 
+int main(void) {
+	int2bin(10);
+	int2bin(12);
+	int2bin(10 & 12);
+	int2bin(10 ^ 12);
+	int2bin(6);
 
-
-
-
-
+	return  0;
+}
+#endif
+----------------------------------------------------------------
 
 
 
