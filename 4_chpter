@@ -290,8 +290,63 @@ int main(void) {
 }
 #endif
 -----------------------------------------------------------------------
+# 스택 : 함수 사용시 사용하는 메모리 공간
+1. 돌아나올 주소 (return address)
+2. 인자를 저장하기 위한 공간(매개변수)
+3. 지역변수를 위한 공감
+stack frame (위에 1,2,3을 통칭)
+activation record
 
+ex_)
+#if 1
+#include <stdio.h>
+#include <string.h>
+struct param {
+	int parr[4096]; //매개변수의 총양
+};
+void f(struct param p) {
+	struct param l = { 1, }; //지역변수
+	printf("%d ", p.parr[0]++);
+	f(p);
+}
+int main(void) {
+	struct param a = {0, }; 
+	f(a);
+	return  0;
+}
+#endif
+@@@@@@@@@@@@@@@@@@@@
+#if 1
+#include <stdio.h>
+#include <string.h>
+struct bigint {
+	int ia[1000];
+};
+int main() {
+	
+	printf("%zd\n", sizeof(bigint));
+}
 
+#endif
+@@@@@@@@@@@@@@@@@@@@@@@@
+#if 1
+#include <stdio.h>
+#include <string.h>
+struct bigint {
+	int ia[4096];
+};
+void f(bigint bi) {
+	bi.ia[0]++;
+	printf("%d,", bi.ia[0]);
+	f(bi);
+}
+int main() {
+	bigint bi = { 0, };
+	f(bi);
+}
+
+#endif
+----------------------------------------------------------------------
 
 
 
