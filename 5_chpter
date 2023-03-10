@@ -373,7 +373,7 @@ int ([]iaa)[4]; //3단계
 int (*iaa)[4]; //4단계 정수변수 4개짜리 주소변수 iaa
 iaa is pointer to array, 4 of int
 
-## 문제 1
+## 연습문제 1
 #if 1
 #include <stdio.h>
 #include <string.h>
