@@ -1,0 +1,114 @@
+#if 1
+
+#include <stdio.h>
+#include <string.h>
+int main(void) {
+
+	char str[5]; // 뒤에 =  {'\0',}가 붙을경우 'OK'만 출력
+
+	str[0] = 'O';
+	str[1] = 'K';
+	printf("%s\n", str);
+
+	return 0;
+}
+#endif
+----------------------------------------------------------------
+포인터 * : 주소변수
+화살표, 포스트잇
+
+정수변수 = 정수값 int i = 3;
+실수변수 = 실수값 double d = 3.14;
+문자변수 = 문자값 char c = 'a';
+주소변수 = 주소값 ? *(주소변수) = &(주소값)
+
+주소변수(포인터) = 주소값(배열)
+
+---------------------------------------------------------------
+#if 1
+
+#include <stdio.h>
+#include <string.h>
+char str[2000000] = "how are you? nice to meet you";
+void f(char sr[2000000]) {
+	printf("%s\n", str);
+}
+int main(void) {
+
+	f(str);
+	printf("hello\n");
+
+	return 0;
+}
+#endif
+---------------------------------------------------------------
+#if 1
+
+#include <stdio.h>
+#include <string.h>
+void f(int ip, double dp, char cp, 
+	//char strp[16], int iarrp[8], double darrp[4] ) {
+	//char strp[], int iarrp[], double darrp[] ) { //숫자빼기
+	char*strp, int*iarrp, double*darrp ) { //주소변수
+	printf("%d\n", ip);
+	printf("%lf\n", dp);
+	printf("%c\n", cp);
+	printf("%s\n", strp);
+	for (int i = 0; i < 8; i++) {
+		printf("%d\n", iarrp[i]); // 다보기 위해서는 for문을 활용
+	}
+	for (int j = 0; j < 4; j++) {
+		printf("%.1lf\n", darrp[j]); // 다보기 위해서는 for문을 활용
+	}
+}
+int main(void) {
+	int i = 3;
+	double d = 3.14;
+	char c = 'a';
+	char str[16] = "hello";
+	int iarr[8] = { 1,2,3,4,5, };
+	double darr[4] = { 1.0, 2.0, };
+	f(i,d,c, // int ip = i / 정수 변수 = 정수값
+  str,iarr, darr ); // char strp[16] = str / 문자 변수 = 문자값
+
+	return 0;
+}
+#endif
+--------------------------------------------------------------
+@ char, int 값도 printf의 2..값은 '8'이 나온다.
+@ 
+
+#if 1
+#include <stdio.h>
+#include <string.h>
+//void f(char str[16]) {
+//void f(char str[]) {
+void f(int* ia) {
+	printf("2..sizeof(str)=%zd\n", sizeof(ia));
+	printf("%s\n", ia);
+}
+int main(void) {
+
+	int ia[16] = {1,};
+	printf("1..sizeof(str)=%zd\n", sizeof(ia));
+	f(ia);
+
+	return 0;
+}
+#endif
+---------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
