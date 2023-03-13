@@ -374,7 +374,7 @@ int main(int argc, char** argv) {
 	printf("배열의 값: ");
 	for (i = 0; i < 3; i++) {
 		printf("%5d", *pa);
-		pa++;
+		pa++; // pa[i]와 (*pa + i) 같이 동작을 한다.
 	}
 	return 0;
 }
