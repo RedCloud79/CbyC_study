@@ -73,7 +73,115 @@ int main(void) {
 }
 #endif
 @visual studio의 경우 프로젝트 - 속성 - c/c++ - 모든옵션 - 준수모드(아니요) 로변경시 오류안뜸
+설정을 안해줄경우 pary[i] = "@@" 줄에서 오류 출력 (const char *pary[5])의 형태로 변형시 올바른표기.
 --------------------------------------------------------------------------------
+#if 1
+#include <stdio.h>
+//void prt(char* pary[5]) {
+void prt(char* pary[]) {
+void prt(char **pary) { // (const char *)*
+	for (int i = 0; i < 5; i++) {
+		printf("%s\n", pary[i]);
+	}
+}
+
+int main(void) {
+
+	char* pary[5];// 문자변수의 주소변수 5개 pary
+	
+	pary[0] = "dog";
+	pary[1] = "elephant";
+	pary[2] = "horse";
+	pary[3] = "tiger";
+	pary[4] = "lion";
+
+	prt(pary);//=>&pary[0] => &(const char *)
+
+	return 0;
+
+}
+#endif
+-------------------------------------------------------------------------------
+#if 1
+#include <stdio.h>
+
+int main(void) {
+
+	int ary1[4] = { 1,2,3,4 };
+	int ary2[4] = { 11,12,13,14 };
+	int ary3[4] = { 21,22,23,24 };
+	int *pary[4] = { ary1, ary2, ary3 };
+	int i, j;
+
+	for (i = 0; i < 3; i++) {
+		for (j = 0; j < 4; j++) {
+			printf("%5d", pary[i][j]);
+		}
+		printf("\n");
+	}
+	return 0;
+
+}
+#endif
+-------------------------------------------------------------------------------
+#if 1
+#include <stdio.h>
+
+//void prt(int* pary[4]) {
+//void prt(int* pary[]) {
+void prt(int **pary) {
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 4; j++) {
+			printf("%5d", pary[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+int main(void) {
+
+	int ary1[4] = { 1,2,3,4 };
+	int ary2[4] = { 11,12,13,14 };
+	int ary3[4] = { 21,22,23,24 };
+	int* pary[4] = { ary1, ary2, ary3 }; // &ayr1[0], &ayr2[0], &ayr3[0]
+	
+	prt(pary);
+	return 0;
+
+}
+#endif
+---------------------------------------------------------------------------
+1차 배열과 함수 : 281~288
+2차 배역과 함수 : 382~396, 431
+*배열과 함수 : 403~410, 425
+
+#if 1
+#include <stdio.h>
+
+void print_str(char ** pss, int cnt) {
+	for (int i = 0; i < cnt; i++) {
+		printf("%s\n", pss[i]);
+		
+	}
+}
+
+int main(void) {
+
+	char* ptr_ary[] = { "eagle", "tiger", "lion", "squirrel" };
+	int count;
+
+	count = sizeof(ptr_ary) / sizeof(ptr_ary[0]);
+	print_str(ptr_ary, count);
+	return 0;
+
+}
+#endif
+------------------------------------------------------------------------------
+
+
+
+
+
 
 
 
