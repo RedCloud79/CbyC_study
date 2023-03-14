@@ -498,7 +498,7 @@ struct profile {
 	double height;
 };
 struct student {
-	struct profile pf;
+	struct profile pf; // struct profile을 pf멤버로 지정 호출할경우 (구조체변수.호출멤버)
 	int id;
 	double grade;
 };
