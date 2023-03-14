@@ -30,10 +30,249 @@ int i=3;
 int j = i+1;
 int k = 3+1;
 -----------------------------------------------------------------------------------
+//접근 연산자 사용해보기
+ex_1)
+#if 1
+#include <stdio.h>
+void func(int* p) {
+	printf("%d", p[0]); //*(p+0)
+	p[0] = 2; // *(p+0) = 2
+}
 
+int main(int argc, char** argv) {
+	int ary[5] = { 1,2,3 };
+	func(ary);
+	printf("%d\n", ary[0]);// *(ary +0)
+	return 0;
+}
 
+#endif
 
+ex_2)
+#if 1
+#include <stdio.h>
+#include <string.h>
+void print_ary(int(*pa)[4]);
+int main(void) {
+	int ary[3][4] = {
+		{1,2,3,4},
+		{5,6,7,8},
+		{9,10,11,12},
+	};
+	print_ary(ary); // &ary[0]
 
+	return 0;
+}
+
+void print_ary(int(*pa)[4]) {
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 4; j++) {
+			printf("%3d", pa[i][j]);// *(*(ary +i)+j)
+		}
+		printf("\n");
+	}
+}
+
+#endif
+-----------------------------------------------------------------------------------
+int (*fp)(int, int); //함수 cf.int *fp(int,int)
+int (*ap)[4]; //배열 cf.int *pa[4]
+#if 1
+#include <stdio.h>
+#include <string.h>
+int sum(int, int);
+int main(void) {
+	int (*fp)(int, int);
+	int res;
+
+	fp = sum;
+	res = fp(10, 20);
+	printf("result: %d\n", res);
+	return 0;
+}
+int sum(int a, int b) {
+	return (a + b);
+}
+#endif
+-------------------------------------------------------------------------------------
+#if 1
+#include <stdio.h>
+#include <string.h>
+void func(int (*fp)(int , int ));
+int sum(int a, int b);
+int mul(int a, int b);
+int max(int a, int b);
+
+int main(void) {
+	int sel;
+
+	printf("01 두 정수의 합\n");
+	printf("02 두 정수의 곱\n");
+	printf("03 두 정수 중에서 큰 값 계산\n");
+	printf("원하는 연산을 선택하세요 : ");
+	scanf("%d", &sel);
+	switch (sel) 
+	{
+	case 1: func(sum); break;
+	case 2: func(mul); break;
+	case 3: func(max); break;
+	}
+	return 0;
+}
+void func(int (*fp)(int, int)) {
+	int a, b;
+	int res;
+
+	printf("두 정수의 값을 입력하세요: ");
+	scanf("%d%d", &a, &b);
+	res = fp(a, b);
+	printf("결과값은 : %d\n", res);
+}
+int sum(int a, int b) {
+	return (a + b);
+}
+int mul(int a, int b) {
+	return (a * b);
+}
+int max(int a, int b) {
+	if (a > b) return a;
+	else return b;
+}
+#endif
+-------------------------------------------------------------------------------------
+#if 1
+#include <stdio.h>
+#include <string.h>
+
+int main(void) {
+	int a = 10;
+	double b = 3.5;
+	void* vp;
+
+	vp = &a;
+	printf("a : %d\n", *(int* )vp);
+
+	vp = &b;
+	printf("b : %.1lf\n", *(double*)vp);
+	
+	return 0;
+}
+#endif
+-------------------------------------------------------------------------------------
+프로그램 : 변수 + 함수(.data+.code)
+*교제 454페이지
+#if 1
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int main(void) {
+	int* pi;
+	int i, sum = 0;
+
+	pi = (int*)malloc(5 * sizeof(int));
+	if (pi == NULL) {
+		printf("메모리가 부족합니다!\n");
+		exit(1);
+	}
+	printf("다섯 명이 나이를 입력하세요 : ");
+	for (i = 0; i < 5; i++) {
+		scanf("%d", &pi[i]);
+		sum += pi[i];
+	}
+	printf("다섯 명의 평균 나이 : %.1lf\n", (sum / 5.0));
+	free(pi);
+
+	return 0;
+}
+#endif
+------------------------------------------------------------------------------------
+#if 1
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int main(void) {
+	int* pi;
+	int size = 5;
+	int count = 0;
+	int num;
+	int i;
+
+	pi = (int*)malloc(5 * sizeof(int));
+	while (1) {
+		printf("양수만 입력하세요 => ");
+		scanf("%d", &num);
+		if (num <= 0) break;
+		if (count == size) {
+			size += 5;
+			pi = (int*)realloc(pi, size * sizeof(int));
+		}
+		pi[count++] = num;
+	}
+	for (i = 0; i < count; i++) {
+		printf("%5d", pi[i]);
+	}
+	free(pi);
+	return 0;
+}
+#endif
+-------------------------------------------------------------------------------------
+#if 1
+#include <stdio.h>
+#include <stdlib.h>
+void func(int* p) {
+	printf("%d\n", p[0]); //*(p+0)
+	p[0] = 2; // *(p+0) = 2
+}
+
+int main() {
+	//int ary[5] = { 1,2,3 };
+	int *ary = (int*)malloc(sizeof(int) * 5);
+	ary[0] = 1; ary[1] = 2; ary[2] = 3; ary[3] = 0; ary[4] = 0;
+	func(ary);
+	printf("%d \n", ary[0]);// *(ary +0)
+	free(ary);
+	return 0;
+}
+
+#endif
+-------------------------------------------------------------------------------------
+#if 1
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+void print_ary(int(*pa)[4]);
+int main(void) {
+	/*int ary[3][4] = {
+		{1,2,3,4},
+		{5,6,7,8},
+		{9,10,11,12},
+	}; */
+	int(*ary)[4] = NULL;
+	ary = (int(*)[4])malloc(sizeof(int) * 4 * 3);
+	int i = 1;
+	for (int r = 0; r < 3; r++) {
+		for (int c = 0; c < 4; c++) {
+			ary[r][c] = i++;
+		}
+	}
+	print_ary(ary); // &ary[0]
+	free(ary);
+	return 0;
+}
+
+void print_ary(int(*pa)[4]) {
+	for (int r = 0; r < 3; r++) {
+		for (int c = 0; c < 4; c++) {
+			printf("%3d", pa[r][c]);// *(*(ary +i)+j)
+		}
+		printf("\n");
+	}
+}
+
+#endif
+--------------------------------------------------------------------------------------
 
 
 
