@@ -160,7 +160,7 @@ int main(void) {
 #endif
 -------------------------------------------------------------------------------------
 프로그램 : 변수 + 함수(.data+.code)
-*교제 454페이지
+*교제 454페이지(참고)
 #if 1
 #include <stdio.h>
 #include <string.h>
@@ -218,6 +218,7 @@ int main(void) {
 }
 #endif
 -------------------------------------------------------------------------------------
+* 1차 배열
 #if 1
 #include <stdio.h>
 #include <stdlib.h>
@@ -238,6 +239,7 @@ int main() {
 
 #endif
 -------------------------------------------------------------------------------------
+*2차 배열을 활용
 #if 1
 #include <stdio.h>
 #include <string.h>
@@ -377,17 +379,17 @@ int main() {
 #include <stdlib.h>
 void add_ten(int b, int *B) {
 	b = b + 10;
-	*B = *B + 10; // B[0]=B[0]+10
+	*B = *B + 10; // B[0]=B[0]+10, A배열에 할당
 	printf("b: %d\n", b);
 	printf("B[0]: %d\n", *B);
 }
 int main() {
 	int a = 10;
-	int A[1] = { 100 };
+	int A[1] = { 100 }; // A의 배열을 가진 함수
 	add_ten(a, A); // int b = a, call by value
 	//int * B = &A[0], call by address
 	printf("a: %d\n", a);
-	printf("A[0]: %d\n", *A);
+	printf("A[0]: %d\n", *A); // 배열의 값이라 B와A는 같은 값을 가진다.
 
 	return 0;
 }
@@ -396,13 +398,13 @@ int main() {
 #if 1
 #include <stdio.h>
 #include <stdlib.h>
-int *sum(int a, int b) {
-	static int res;
+int *sum(int a, int b) {// int형 변수의 주소를 반환하는 함수 선언
+	static int res; // 정적 지역 변수
 	res = a + b;
 	return &res;
 }
 int main() {
-	int* resp;
+	int* resp; // int*sum(int a, int b); 의 구조와 같은 구조
 
 	resp = sum(10, 20);
 	printf("두 정수의 합 : %d\n", *resp);
@@ -415,15 +417,15 @@ int main() {
 #if 1
 #include <stdio.h>
 #include <stdlib.h>
-struct student {
+struct student { // 구조체 선언 ( 구조체의 마지막에는 ;이 들어간다
 	int num;
 	double grade;
 };
 int main() {
-	struct student s1;
+	struct student s1; // 구조체형은 int와 double로 이루어진 자료형
 
 	s1.num = 2;
-	s1.grade = 2.7;
+	s1.grade = 2.7; // 구도체 변수명, 멤버 접근 연산자(.), 멤버명을 보유한 구조.
 	printf("학번 : %d\n", s1.num);
 	printf("학점 : %.1lf\n", s1.grade);
 
@@ -436,14 +438,14 @@ int main() {
 #if 1
 #include <stdio.h>
 #include <stdlib.h>
-#pragma pack(1)
-struct student {
-	char ch1;
-	short num;
-	int score;
-	char ch2;
-	double grade;
-	char ch3;
+#pragma pack(1) // 바이트 얼라인먼트를 1로 설정하면 패딩 바이트가 필요 없음.
+struct student { // 1줄의 8바이트로 이루어진 층의 구조를 이룸.
+	char ch1; // 1byte
+	short num; // 2byte
+	int score; // 4byte
+	char ch2; // 1byte
+	double grade; // 8byte
+	char ch3; // 1byte
 };
 int main() {
 	printf("%zd", sizeof(student));
@@ -458,21 +460,23 @@ int main() {
 #include <string.h>
 
 struct profile {
-	char name[20];
+	char name[20]; // 이름을 저장할 배열 멤버
 	int age;
 	double height;
-	char* intro; // 포인터 멤버를 사용하여 intro연결
+	char* intro; // 포인터 멤버를 사용하여 intro연결, 자기소개를 위한 포인터
 };
 int main() {
 	struct profile yuni;
 
-	strcpy(yuni.name, "서하윤"); // name멤버에 이름을 저장할 땐느 'strcpy'함수를 사용한다.
+	strcpy(yuni.name, "서하윤"); // name멤버에 이름을 저장할 때는 'strcpy'함수를 사용한다.(복사의 역할)
+				     // strcpy(붙어 넣어야하는 배열을 호출, 붙여넣을 함수)의 형태
 	yuni.age = 17;
 	yuni.height = 164.5;
 
-	yuni.intro = (char*)malloc(80); 
+	yuni.intro = (char*)malloc(80); // intro의 공간은 없기 때문에 80이라는 공간을 할당하여
+					// 적당한 크기의 저장 공간을 확보
 	printf("자기소개 : ");
-	gets_s(yuni.intro, 80);
+	gets_s(yuni.intro, 80); 
 
 	printf("이름 : %s\n", yuni.name);
 	printf("나이 : %d\n", yuni.age);
@@ -501,7 +505,7 @@ struct student {
 int main(void) {
 	struct student yuni;
 
-	yuni.pf.age = 17;
+	yuni.pf.age = 17; // yuni 구조체 변수의 pf 멤버 접근, pf 구조체 변수의 age 멤버 접근
 	yuni.pf.height = 164.5;
 	yuni.id = 315;
 	yuni.grade = 4.3;
@@ -515,8 +519,6 @@ int main(void) {
 }
 #endif
 ---------------------------------------------------------------------------
-
-
 
 
 
