@@ -1,2 +1,257 @@
 # CbyC_study
 C/C++언어 정리
+* 구조체 변수의 초기화와 대입
+#if 1
+#include <stdio.h>
+#include <stdlib.h>
+struct student
+{
+	int id;
+	char name[20];
+	double grade;
+};
+int main() {
+	
+	struct student s1 = { 315,"홍길동", 2.4 },
+		s2 = { 316,"이순신", 3.7 },
+		s3 = { 317,"세종대왕", 4.4 };
+	struct student max;
+
+	max = s1;
+	if (s2.grade > max.grade) max = s2;
+	if (s3.grade > max.grade) max = s3;
+
+	printf("학번 : %d\n", max.id);
+	printf("이름 : %s\n", max.name);
+	printf("학점 : %.1lf\n", max.grade);
+
+	return 0;
+}
+#endif
+-------------------------------------------------------------------------------
+#if 0
+#include <stdio.h>
+#include <stdlib.h>
+struct vision {
+	double left;
+	double right;
+	double middle[100];
+};
+
+struct vision exchange(struct vision robot);
+
+int main(void) {
+	struct vision robot;
+
+	printf("%zd, %p\n", sizeof(robot), &robot);
+	printf("시력 입력: ");
+	scanf("%lf%lf", &(robot.left), &(robot. right));
+	robot = exchange(robot);
+	printf("바뀐 시력 : %.1lf %.1lf\n", robot.left, robot.right);
+
+	return 0;
+}
+struct vision exchange(struct vision robot) {
+	printf("%zd, %p\n", sizeof(robot), &robot);
+	double temp;
+
+	temp = robot.left;
+	robot.left = robot.right;
+	robot.right = temp;
+
+	return robot;
+}
+#endif
+-------------------------------------------------------------------------------
+#if 1
+#include <stdio.h>
+#include <stdlib.h>
+struct vision {
+	double left;
+	double right;
+	double middle[100];
+};
+vision exchange(vision* robot) {
+	printf("%zd, %p\n", sizeof(robot), &robot);
+	double temp;
+
+	temp = robot->left;
+	robot->left = robot->right;
+	robot->right = temp;
+
+	return *robot;
+}
+int main(void) {
+	struct vision robot = { 15.5, 20.0 };
+
+	printf("%zd, %p\n", sizeof(robot), &robot);
+	robot = exchange(&robot);
+	printf("바뀐 시력 : %.1lf %.1lf\n", robot.left, robot.right);
+
+	return 0;
+}
+#endif
+-------------------------------------------------------------------------------
+#if 1
+#include <stdio.h>
+#include <stdlib.h>
+struct vision {
+	double left;
+	double right;
+	double middle[100];
+};
+vision * exchange(vision* robot) {
+	printf("%zd, %p, %p\n", sizeof(robot), &robot, robot);
+	double temp;
+
+	temp = robot->left;
+	robot->left = robot->right;
+	robot->right = temp;
+
+	return robot;
+}
+int main(void) {
+	struct vision robot = { 15.5, 20.0 };
+
+	printf("%zd, %p\n", sizeof(robot), &robot);
+	vision * vp = exchange(&robot);
+	printf("바뀐 시력 : %.1lf %.1lf\n", robot.left, robot.right);
+
+	return 0;
+}
+#endif
+-------------------------------------------------------------------------------
+#if 1
+#include <stdio.h>
+#include <stdlib.h>
+struct score {
+	int kor, eng, math;
+};
+
+int main(void) {
+	struct score yuni = { 90, 80, 70 };
+	struct score* ps = &yuni;
+	printf("국어 : %d\n", (*ps).kor);
+	printf("영어 : %d\n", ps->eng);
+	printf("수학 : %d\n", ps->math);
+	return 0;
+}
+#endif
+-------------------------------------------------------------------------------
+#if 1
+#include <stdio.h>
+#include <stdlib.h>
+struct address {
+	char name[20];
+	int age;
+	char tel[20];
+	char addr[80];
+};
+
+int main(void) {
+	struct address list[5] = {
+		{"홍길동", 23, "111-1111", "울릉도 독도"},
+		{"이순신", 35, "222-2222", "서울 건천동"},
+		{"장보고", 19, "333-3333", "완도 청해진"},
+		{"유관순", 15, "444-4444", "충남 천안"},
+		{"안중근", 45, "555-5555", "황해도 해주"},
+		};
+	int i;
+
+	for (i = 0; i < 5; i++) {
+		printf("%10s%5d%15s%20s\n",
+			list[i].name, list[i].age, list[i].tel, list[i].addr );
+	}
+	return 0;
+}
+#endif
+--------------------------------------------------------------------------------
+#if 1
+#include <stdio.h>
+#include <stdlib.h>
+struct address {
+	char name[20];
+	int age;
+	char tel[20];
+	char addr[80];
+};
+void print_list(struct address *lp) {
+	int i;
+
+	for (i = 0; i < 5; i++) {
+		printf("%10s%5d%15s%20s\n",
+			(lp+i)->name, (lp + i)->age, (lp + i)->tel, (lp + i)->addr);
+		//&lp[i].name, &lp[i].age, &lp[i].tel, &lp[i].addr);
+	}
+}
+int main(void) {
+	struct address list[5] = {
+		{"홍길동", 23, "111-1111", "울릉도 독도"},
+		{"이순신", 35, "222-2222", "서울 건천동"},
+		{"장보고", 19, "333-3333", "완도 청해진"},
+		{"유관순", 15, "444-4444", "충남 천안"},
+		{"안중근", 45, "555-5555", "황해도 해주"},
+		};
+
+	print_list(list);
+	
+	return 0;
+}
+#endif
+----------------------------------------------------------------------------------
+*자기 참조 구조체
+#if 1
+#include <stdio.h>
+#include <stdlib.h>
+struct list {
+	int num;
+	struct list* next;
+};
+int main(void) {
+	struct list a = { 10, 0 }, b = { 20, 0 }, c = { 30, 0 };
+	struct list* head = &a, * current;
+
+	a.next = &b;
+	b.next = &c;
+
+	printf("head->num : %d\n", head->num);
+	printf("head->next->num : %d\n", head->next->num);
+
+	printf("list all : ");
+	current = head;
+	while (current != NULL) {
+		printf("%d ", current->num);
+		current = current->next;
+	}
+	printf("\n");
+
+	return 0;
+}
+#endif
+-------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
