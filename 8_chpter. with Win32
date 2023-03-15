@@ -51,9 +51,9 @@ int main(void) {
 
 	return 0;
 }
-struct vision exchange(struct vision robot) {
+struct vision exchange(struct vision robot) { // swap이 이루어짐 왼,오 입력값을 반대로 받음.
 	printf("%zd, %p\n", sizeof(robot), &robot);
-	double temp;
+	double temp; // 빈 실수형 변수 선언.
 
 	temp = robot.left;
 	robot.left = robot.right;
