@@ -229,14 +229,107 @@ int main(void) {
 }
 #endif
 -------------------------------------------------------------------------------
+===============================================================================
+*Win 32
+#include <windows.h>
+#include <stdio.h>
+int main() {
+	printf("befor\n");
+	CreateWindow(L"listbox", L"Select on me", 
+		WS_OVERLAPPEDWINDOW | WS_VISIBLE, 800, 400, 200, 200, 0, 0, 0, 0);
+	// 버튼형식의 윈도우창, 출력글씨, [(가로), (세로)]윈도우창의 위치 2자리, 
+	// 4면이 200인창 사이즈
+	MessageBox(0, L"Hello Windows!", L"win", MB_YESNOCANCEL);
+	// 2byte가 필요로 하여 'L'이 붙음
+	
+	printf("after\n");
 
+}
+-------------------------------------------------------------------------------
+#include <windows.h>
+#include <stdio.h>
+int main() {
+	
+	CreateWindow(L"button", L"PUSH ME!",
+		WS_OVERLAPPEDWINDOW | WS_VISIBLE, 800, 400, 200, 200, 0, 0, 0, 0);
+	// 버튼형식의 윈도우창, 출력글씨, [(가로), (세로)]윈도우창의 위치, 
+	// 4면이 200인창 사이즈
+	MSG msg;
+	while (1) {
+		GetMessage(&msg, 0, 0, 0);
+		switch (msg.message) {
+		case WM_CHAR:
+				printf("WM_CHAR");
+				break;
+		case WM_MOUSEMOVE:
+				printf("WM_MOUSEMOVE");
+				break;
+		}
+		printf(".");
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
 
+}
+--------------------------------------------------------------------------------
+#include <windows.h>
+#include <stdio.h>
+int main() {
+	
+	CreateWindow(L"button", L"PUSH ME!",
+		WS_OVERLAPPEDWINDOW | WS_VISIBLE, 800, 400, 200, 200, 0, 0, 0, 0);
+	// 버튼형식의 윈도우창, 출력글씨, [(가로), (세로)]윈도우창의 위치, 
+	// 4면이 200인창 사이즈
+	MSG msg;
+	while (1) {
+		GetMessage(&msg, 0, 0, 0);
+		switch (msg.message) {
+		case WM_CHAR:
+				printf("%c", LOWORD(msg.wParam));
+				break;
+		case WM_MOUSEMOVE:
+				printf("(%d,%d)", LOWORD(msg.lParam),HIWORD(msg.lParam));
+				break;
+		}
+		printf(".");
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
 
+}
+---------------------------------------------------------------------------------
+Visual Studio  -> 상단탭의 [프로젝트] -> [프로젝트명 속성] -> [구성속성/고급] -> [문자집합]에서 
+   [사용안함]으로 변경
+#include <windows.h>
+#include <stdio.h>
+int main() {
+	
+	CreateWindow("button", "PUSH ME!",
+		WS_OVERLAPPEDWINDOW | WS_VISIBLE, 100, 100, 100, 100, 0, 0, 0, 0);
+	// 버튼형식의 윈도우창, 출력글씨, [(가로), (세로)]윈도우창의 위치, 
+	// 4면이 200인창 사이즈
+	MSG msg;
+	while (1) {
+		GetMessage(&msg, 0, 0, 0);
+		static char buff[32] = { 0, };
+		switch (msg.message) {
+		case WM_CHAR:
+			wsprintf(buff, "%c", LOWORD(msg.wParam));
+			SetWindowText(msg.hwnd, buff);
+			break;
+		case WM_MOUSEMOVE:
+			wsprintf(buff, "(%d,%d)", 
+					LOWORD(msg.lParam),HIWORD(msg.lParam));
+			SetWindowText(msg.hwnd, buff);
+			break;
+		}
+		printf(".");
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
 
-
-
-
-
+}
+--------------------------------------------------------------------------------
 
 
 
