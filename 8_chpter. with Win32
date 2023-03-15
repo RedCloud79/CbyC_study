@@ -330,21 +330,187 @@ int main() {
 
 }
 --------------------------------------------------------------------------------
+#include <windows.h>
+#include <stdio.h>
+LRESULT CALLBACK MyWndProc(HWND, UINT, WPARAM, LPARAM);
+int main() {
+	WNDCLASS wc = { 0, };
+	wc.lpszClassName = "MyWnd";
+	wc.lpfnWndProc = MyWndProc;
+	wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH); // 뒷배경 창확대설정
+	wc.hCursor = LoadCursor(0, IDC_ARROW); //마우스 커서 설정
+	RegisterClass(&wc); //os등록
 
+	CreateWindow("MyWnd", "Helo Window!",
+		WS_OVERLAPPEDWINDOW | WS_VISIBLE, 100, 100, 400, 400, 0, 0, 0, 0);
+	// 버튼형식의 윈도우창, 출력글씨, [(가로), (세로)]윈도우창의 위치, 
+	// 4면이 200인창 사이즈
 
+	MSG msg;
+	while (1) {
+		GetMessage(&msg, 0, 0, 0); //입력을 기다림
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
 
+}
+LRESULT CALLBACK
+MyWndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
+{
+	static char buff[32] = { 0, };
+		switch (iMsg) {
+		case WM_CHAR:
+			wsprintf(buff, "%c", LOWORD(wParam));
+			SetWindowText(hWnd, buff);
+			break;
+		case WM_MOUSEMOVE:
+			wsprintf(buff, "(%d,%d)",
+				LOWORD(lParam), HIWORD(lParam));
+			SetWindowText(hWnd, buff);
+			break;
+		}
+	return DefWindowProc(hWnd, iMsg, wParam, lParam);
+}
+-----------------------------------------------------------------------------------
+#include <windows.h>
+#include <stdio.h>
+LRESULT CALLBACK MyWndProc(HWND, UINT, WPARAM, LPARAM);
+int main() {
+	WNDCLASS wc = { 0, };
+	wc.lpszClassName = "MyWnd";
+	wc.lpfnWndProc = MyWndProc;
+	wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH); // 뒷배경 창확대설정
+	wc.hCursor = LoadCursor(0, IDC_ARROW); //마우스 커서 설정
+	RegisterClass(&wc);
 
+	CreateWindow("MyWnd", "Helo Window!",
+		WS_OVERLAPPEDWINDOW | WS_VISIBLE, 100, 100, 400, 400, 0, 0, 0, 0);
+	// 버튼형식의 윈도우창, 출력글씨, [(가로), (세로)]윈도우창의 위치, 
+	// 4면이 200인창 사이즈
 
+	MSG msg;
+	while (1) {
+		GetMessage(&msg, 0, 0, 0);
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
 
+}
+LRESULT CALLBACK
+MyWndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
+{
+	static char buff[32] = { 0, };
+		switch (iMsg) {
+		case WM_CHAR:
+			wsprintf(buff, "%c", LOWORD(wParam));
+			SetWindowText(hWnd, buff);
+			return 0;
+		case WM_MOUSEMOVE:
+			wsprintf(buff, "(%d,%d)",
+				LOWORD(lParam), HIWORD(lParam));
+			SetWindowText(hWnd, buff);
+			return 0;
+		case WM_KEYDOWN:
+		case WM_KEYUP:
+			switch (LOWORD(wParam)) {
+			case VK_LEFT: printf("<-"); break;
+			case VK_RIGHT: printf("->"); break;
+			case VK_UP: printf("ㅗ"); break;
+			case VK_DOWN: printf("T"); break;
+			case VK_SPACE : printf("_"); break;
+			case VK_F1: printf("F1"); break;
+			case 'A': printf("A"); break;
+			}
+			return 0;
+		}
+	return DefWindowProc(hWnd, iMsg, wParam, lParam);
+}
+-----------------------------------------------------------------------------------
+#include <windows.h>
+#include <stdio.h>
+#include "resource.h"
 
+LRESULT CALLBACK MyWndProc(HWND, UINT, WPARAM, LPARAM);
+int main() {
+	WNDCLASS wc = { 0, };
+	wc.lpszClassName = "MyWnd";
+	wc.lpfnWndProc = MyWndProc;
+	wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH); // 뒷배경 창확대설정
+	wc.hCursor = LoadCursor(0, IDC_ARROW); //마우스 커서 설정
+	wc.lpszMenuName = MAKEINTRESOURCE(IDR_MENU1);
+	RegisterClass(&wc);
 
+	CreateWindow("MyWnd", "Helo Window!",
+		WS_OVERLAPPEDWINDOW | WS_VISIBLE, 100, 100, 400, 400, 0, 0, 0, 0);
+	// 버튼형식의 윈도우창, 출력글씨, [(가로), (세로)]윈도우창의 위치, 
+	// 4면이 200인창 사이즈
 
+	MSG msg;
+	while (1) {
+		if(GetMessage(&msg, 0, 0, 0)==0) break;
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
 
-
-
-
-
-
+}
+LRESULT CALLBACK
+MyWndProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
+{
+	static char buff[32] = { 0, };
+		switch (iMsg) {
+		case WM_CHAR:
+			wsprintf(buff, "%c", LOWORD(wParam));
+			SetWindowText(hWnd, buff);
+			return 0;
+		case WM_MOUSEMOVE:
+			wsprintf(buff, "(%d,%d)",
+				LOWORD(lParam), HIWORD(lParam));
+			SetWindowText(hWnd, buff);
+			return 0;
+		case WM_KEYDOWN:
+		case WM_KEYUP:
+			switch (LOWORD(wParam)) {
+			case VK_LEFT: printf("<-"); break;
+			case VK_RIGHT: printf("->"); break;
+			case VK_UP: printf("ㅗ"); break;
+			case VK_DOWN: printf("T"); break;
+			case VK_SPACE : printf("_"); break;
+			case VK_F1: printf("F1"); break;
+			case 'A': printf("A"); break;
+			}
+			return 0;
+		case WM_LBUTTONDOWN:
+			printf("L(%d, %d)", LOWORD(lParam), HIWORD(lParam));
+			return 0;
+		case WM_CREATE:
+			printf("여서 GUI를 꾸미세요");
+			SetTimer(hWnd, 1001, 10, NULL);
+			CreateWindow("button", "A", WS_CHILD | WS_VISIBLE, 10, 10, 60, 40,
+				hWnd, (HMENU)2001, 0, 0);
+			CreateWindow("button", "B", WS_CHILD | WS_VISIBLE, 100, 10, 60, 40,
+				hWnd, (HMENU)2002, 0, 0);
+			CreateWindow("button", "C", WS_CHILD | WS_VISIBLE, 200, 10, 60, 40,
+				hWnd, (HMENU)2003, 0, 0);
+			return 0;
+		case WM_COMMAND:
+			switch (LOWORD(wParam)) {
+			case 2001:printf("A");break;
+			case 2002:printf("B");break;
+			case 2003:printf("C");break;
+			case ID_FILE_NEW:printf("N"); break;
+			case ID_FILE_SAVE:printf("S"); break;
+			}
+		case WM_TIMER:
+			return 0;
+		case WM_DESTROY:
+			printf("윈도우를 닫습니다.");
+			PostQuitMessage(0); //WM_QUIT -> 메시지큐
+			return 0;
+		
+		}
+	return DefWindowProc(hWnd, iMsg, wParam, lParam);
+}
+---------------------------------------------------------------------------------
 
 
 
