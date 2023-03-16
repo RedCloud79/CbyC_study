@@ -1,2 +1,55 @@
 # CbyC_study
 C/C++언어 정리
+#if 1
+#include <stdio.h>
+#include <stdlib.h>
+struct train {
+	int seats;
+	struct train* next;
+};
+int main(void) {
+	train* head = NULL, * tail = NULL;
+	for (int i = 0; i < 1000000; i++) {
+		if (head == NULL) {
+			head = tail = (train*)malloc(sizeof(train));
+			
+		}
+		else {
+			tail->next = (train*)malloc(sizeof(train));
+			tail = tail->next;
+		}
+		tail->seats = i;
+
+	}
+	printf("1\n");
+	train* curr = NULL;
+	for (curr = head; curr != tail; curr = curr->next) {
+		//printf("%d->", curr->seats);
+	}
+	printf("%d", curr->seats);
+	return 0;
+}
+#endif
+-----------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
