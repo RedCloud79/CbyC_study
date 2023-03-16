@@ -49,8 +49,33 @@ int main(void) {
 }
 #endif
 -----------------------------------------------------------------------------------
+# enum 문은 switch 문을 같이 사용한다.
 
+#if 1
+#include <stdio.h>
+#include <stdlib.h>
+enum season {SPRING, SUMMER, FALL, WINTER}; //열거형 선언{0,1,2,3}의 값을 가진다.
+// spring =5, fall = 10 인경우 summer= 6, winter = 11의 값을 가진다.
+int main(void) {
+	enum season ss; //열거형 변수 선언
+	char* pc = NULL; // 문자열을 저장할 포인터
 
+	ss = SPRING; // 열거 멤버의 값
+	switch (ss) { //멤버값 판단
+	case SPRING: // spring 대신 0을 대입하여도 동작.
+		pc = "inline"; break;
+	case SUMMER:
+		pc = "swimming"; break;
+	case FALL:
+		pc = "trip"; break;
+	case WINTER:
+		pc = "skiing"; break;
+	}
+	printf("나의 레저 활동 : %s\n", pc);
+	return 0;
+}
+#endif
+-----------------------------------------------------------------------------------
 
 
 
