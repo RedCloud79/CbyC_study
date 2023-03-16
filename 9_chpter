@@ -106,6 +106,176 @@ int main(void) {
 }
 #endif
 -----------------------------------------------------------------------------------
+* define NULL (void*)0 = 대상이 무엇인지 모르는 주소값
+#if 1
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+	FILE * fp = fopen("test.txt", "w");
+	char buff[128] = "";
+	printf("임의의 문자열을 입력하세요! ");
+	gets_s(buff, sizeof(buff));
+	
+	fprintf(fp, buff);
+	fclose(fp);
+}
+#endif
+-------------------------------------------------------------------------------
+#if 1
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+	FILE* fp = fopen("test.txt", "w");
+	for (int i = 0; i < 10; i++) {
+		fprintf(fp, "%d", i);
+	}
+	fclose(fp);
+}
+#endif
+-------------------------------------------------------------------------------
+#if 1
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+	FILE* fp = fopen("test.txt", "w");
+	for (int i = 0; i < 1000000; i++) {
+		fprintf(fp, "%d ", i);
+	}
+	fclose(fp);
+
+	fp = fopen("test.txt", "r");
+	int data = 0;
+	for (int i = 0; i < 1000000; i++) {
+		fscanf(fp, "%d ", &data);
+		printf("%d ", data);
+	}
+	fclose(fp);
+}
+#endif
+-------------------------------------------------------------------------------
+# 520페이지 ~~ 
+#if 1
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+	FILE* fp;
+	int ch;
+
+	fp = fopen("a.txt", "r"); // 읽기전용으로 파일 열기
+	if (fp == NULL) { // 파일이 개방되었는지 확인
+		printf("파일이 열리지 않습니다.\n");
+		return 1;
+	}
+	while (1) {
+		ch = fgetc(fp); // 개방한 파일에서 문자 입력
+		if (ch == EOF) { // 함수의 반환갑이 EOF면 입력 종료 EOF(end of file) = 오류발생, 파일의 데이터를 모두
+						 //읽었는지 확인할 때 사용합니다.
+			break;
+		}
+		putchar(ch); // 입력한 문자를 화면에 출력
+
+	}
+	fclose(fp);
+	return 0;
+}
+#endif
+--------------------------------------------------------------------------------
+#if 1
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+	FILE* fp = fopen("test.txt", "r");
+	for (int i = 0; i < 1000; i++) {
+		fprintf(fp, "%d ", i);
+	}
+	fclose(fp);
+
+	/*fp = fopen("test.txt", "r");
+	int data = 0;
+	for (int i = 0; i < 1000000; i++) {
+		fscanf(fp, "%d ", &data);
+		printf("%d ", data);
+	}
+	fclose(fp);*/
+	fp = fopen("test.txt", "r");
+	while (1) {
+		int ch = fgetc(fp); // 개방한 파일에서 문자 입력
+		if (ch == EOF) { // 함수의 반환갑이 EOF면 입력 종료 EOF(end of file) = 오류발생, 파일의 데이터를 모두
+			//읽었는지 확인할 때 사용합니다.
+			break;
+		}
+		putchar(ch); // 입력한 문자를 화면에 출력
+
+	}
+	fclose(fp);
+}
+#endif
+-----------------------------------------------------------------------------------
+*문자열을 한문잤기 파일로 출력하기
+#if 1
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+	FILE* fp;
+	char str[] = "banana";
+	int i;
+
+	fp = fopen("b.txt", "w");
+	if (fp == NULL) {
+		printf("파일을 만들지 못했습니다.\n");
+		return 1;
+	}
+
+	i = 0;
+	while (str[i] != '\n') {
+		fputc(str[i], fp);
+		i++;
+	}
+	fputc('\n', fp);
+	fclose(fp);
+
+	return 0;
+}
+#endif
+-------------------------------------------------------------------------------------
+#if 1
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+	int ch;
+
+	while (1) {
+		ch = fgetc(stdin);
+		if (ch == EOF) {
+			break;
+		}
+		fputc(ch, stdout);
+	}
+
+	return 0;
+}
+#endif
+-------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
