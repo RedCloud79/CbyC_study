@@ -263,11 +263,99 @@ int main(void) {
 }
 #endif
 -------------------------------------------------------------------------------------
+#if 0
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+	FILE *fp;
+	int arr[] = { 13, 10, 13, 13, 10, 26, 13, 10, 13, 10 };
+	int i, res;
+
+	fp = fopen("a.txt", "wb");
+	for (i = 0; i < 10; i++) {
+		fputc(arr[i], fp);
+	}
+	fclose(fp);
+
+	fp = fopen("a.txt", "rt");
+	while (1) {
+		res = fgetc(fp);
+		if (res == EOF) break;
+		printf("%4d", res);
+	}
+	fclose(fp);
+
+	return 0;
+}
+#endif
+---------------------------------------------------------------------------------------
+#if 0
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(void) {
+	FILE* fp;
+	char str[20];
+
+	fp = fopen("a.txt", "a+");
+	if (fp == NULL) {
+		printf("파일을 만들지 못했습니다.");
+		return 1;
+	}
+
+	while (1) {
+		printf("과일 이름 : ");
+		scanf("%s", str);
+		if (strcmp(str, "end") == 0) {
+			break;
+		}
+		else if (strcmp(str, "list") == 0) {
+			fseek(fp, 0, SEEK_SET);
+			while (1) {
+				fgets(str, sizeof(str), fp);
+				if (feof(fp)) {
+					break;
+				}
+				printf("%s", str);
+			}
+		}
+		else {
+			fprintf(fp, "%s\n", str);
+		}
+	}
+	fclose(fp);
 
 
+	return 0;
+}
+#endif
+------------------------------------------------------------------------------------
+* 파일 복사, 붙여넣기
+#if 1
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char **argv) {
+	//mycopy.exe temp.png temp_2.png
+	char *sname = argv[1];
+	char *dname = argv[2];
+	FILE* sfile = fopen(sname, "rb");
+	FILE* dfile = fopen(dname, "wb");
+	char buffer[1];
+	while (1) {
+		if (fread(buffer, sizeof(buffer), 1, sfile) == 0)break;
+		fwrite(buffer, sizeof(buffer), 1, dfile);
+	}
+	fclose(sfile);
+	fclose(dfile);
 
 
-
+	return 0;
+}
+#endif
+-----------------------------------------------------------------------------------
 
 
 
