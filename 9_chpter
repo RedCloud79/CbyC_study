@@ -76,12 +76,36 @@ int main(void) {
 }
 #endif
 -----------------------------------------------------------------------------------
+* typedef int int32_t;
+  typedef int int16_t;
+  typedef unsinged int uint32_t;
+  typedef unsinged int uint16_t;
+  typedef char int8_t;
+  
+int32_t i;
+int8_t c;
 
+* #include <stdint.h>을 가지고있다.
 
-
-
-
-
+#if 1
+#include <stdio.h>
+#include <stdlib.h>
+struct student {
+	int num;
+	double grade;
+};
+typedef struct student Student;
+void print_data(Student* ps) {
+	printf("학번 : %d\n", ps->num);
+	printf("학점 : %.1lf\n", ps->grade);
+}
+int main(void) {
+	Student s1 = { 315, 4.2 };
+	print_data(&s1);
+	return 0;
+}
+#endif
+-----------------------------------------------------------------------------------
 
 
 
