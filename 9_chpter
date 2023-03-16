@@ -385,13 +385,23 @@ int main(int argc, char **argv) {
 	return 0;
 }
 #endif
----------------------------------------------------------------------------------
-
-
-
-
-
-
+-------------------------------------------------------------------------------
+================================
+- 키보드 모니터
+printf-scanf 
+gets-puts
+getchar-putchar
+- 파일 함수
+fopen-fclose = 열고 닫기
+fprintf-fscanf
+fgets-fputs = 줄단위로 읽음
+fgetc-fputc = 칸단위로 읽음
+fwrite-fread
+fseek = 세세한 조정
+stell
+rewind
+feof
+================================
 
 
 
