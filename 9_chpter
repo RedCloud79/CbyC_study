@@ -31,8 +31,24 @@ int main(void) {
 }
 #endif
 -----------------------------------------------------------------------------------
+#if 1
+#include <stdio.h>
+#include <stdlib.h>
+union student{
+	int num;
+	double grade;
+};
+int main(void) {
+	union student s1 = { 315 }; // 1번 출력후 초기화
 
-
+	printf("학번 : %d\n", s1.num);
+	s1.grade = 4.4;
+	printf("학점 : %.lf\n", s1.grade);
+	printf("학번 : %d\n", s1.num);
+	return 0;
+}
+#endif
+-----------------------------------------------------------------------------------
 
 
 
