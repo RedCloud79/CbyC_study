@@ -349,9 +349,34 @@ int main(void) {
 	cout << s3.name<< endl;
 	cout << s3.age<< endl;
 }
+-------------------------------------------------------------------------------------
+#include <iostream>
+#include <math.h>
 
+using namespace std;
 
-
+struct Student
+{
+	const char* name;
+	int age;
+};
+const char * getName(Student *inst) {
+	return inst->name;
+}
+int getAge(Student *inst) {
+	return inst->age;
+}
+void setAge(Student * inst, int newAge) {
+	inst->age = newAge; // -> 주소값 변수
+}
+int main(void) {
+	Student s3 = { "jane", 24 };
+	cout << getName(&s3) << endl;
+	cout << getAge(&s3) << endl;
+	setAge(&s3, getAge(&s3) + 1);
+	cout << getAge(&s3) << endl;
+}
+-----------------------------------------------------------------------------------
 
 
 
