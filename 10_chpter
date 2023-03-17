@@ -116,9 +116,47 @@ int main() {
 }
 #endif
 ---------------------------------------------------------------------------------
+# 분할 컴파일
 
+ex_main)
+#include <stdio.h>
+extern int i;
+//int i = 3;
+int g();
+int main() {
+	printf("%d", g());
+}
 
+ex_b)
+static int i = 3;
 
+static int f() {
+	return i;
+}
+
+int g() {
+	return f();
+}
+-----------------------------------------------------------------------------------
+# 헤더 파일 활용
+ex_b.cpp)
+//AA
+#include "A.h"
+//BB
+#include "A.h"
+
+int main() {
+
+}
+
+ex_A.h)
+#pragma once
+//#ifndef __A_H__
+//#define __A_H__
+
+struct studend {};
+//#endif
+------------------------------------------------------------------------------------
 
 
 
