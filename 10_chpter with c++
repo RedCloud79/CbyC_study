@@ -431,8 +431,87 @@ int main(void) {
 	cout << s3.getAge() << endl;
 }
 -----------------------------------------------------------------------------------
+#include <iostream>
+#include <math.h>
 
+using namespace std;
+int AreaCube(int length, int width =25, int height = 1);
+int main(){
+    int length = 100;
+    int width = 50;
+    int height = 2;
+    int area;
+    
+    area = AreaCube(length, width, height);
+    cout <<"First area equals:"<<area << endl;
+    
+    area = AreaCube(length, width);
+    cout <<"First area equals:"<<area << endl;
+    
+    area = AreaCube(length);
+    cout <<"First area equals:"<<area << endl;
+    return 0;
+}
+int AreaCube(int length, int width, int height){
+    return (length*width*height);
+}
+--------------------------------------------------------------------------------
+operatior overloading : (중복정의)
+function overloading : (함수 중첩)
+overriding : (덮어쓰기)
 
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+int Double(int);
+long Double(long);
+float Double(float);
+double Double(double);
+int main(){
+    int myint = 6500;
+    long mylong = 65000;
+    float myFloat = 6.5F;
+    double myDouble = 6.5e20;
+    
+    int doubledint;
+    long doubledlong;
+    float doubledfloat;
+    double doubledDouble;
+    
+    cout<<"myint: "<<myint<<endl;
+    cout<<"mylong: "<<mylong<<endl;
+    cout<<"myFloat: "<<myFloat<<endl;
+    cout<<"myDouble: "<<myDouble<<endl;
+    
+    doubledint = Double(myint);
+    doubledlong = Double(mylong);
+    doubledfloat = Double(myFloat);
+    doubledDouble = Double(myDouble);
+    
+    cout<<"doubledint"<<doubledint<<endl;
+    cout<<"doubledlong"<<doubledlong<<endl;
+    cout<<"doubledFloat"<<doubledfloat<<endl;
+    cout<<"doubledDouble"<<doubledDouble<<endl;
+    
+}
+int Double(int original){
+    cout << "In Double(int)\n";
+    return 2 * original;
+}
+long Double(long original){
+    cout << "In Double(long)\n";
+    return 2 * original;
+}
+float Double(float original){
+    cout << "In Double(Float)\n";
+    return 2 * original;
+}
+double Double(double original){
+    cout << "In Double(double)\n";
+    return 2 * original;
+}
+------------------------------------------------------------------------------------
 
 
 
