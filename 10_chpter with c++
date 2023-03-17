@@ -277,32 +277,53 @@ int main() {
     if (age >= 19){
         cout<<age<<endl;
     }
-    
 }
 ------------------------------------------------------------------------------------------
+#include <iostream>
+#include <math.h>
 
+using namespace std;
 
+int main() {
+    
+    int cpp_level = 0;
+    while (cpp_level < 10){
+        cout << "study c++ ";
+        cpp_level++;
+        cout << cpp_level << endl;
+    }
+}
+-----------------------------------------------------------------------------------------
+#include <iostream>
+#include <math.h>
 
+using namespace std;
 
+int main() {
+    
+    const char *eggs[] = {"egg0", "egg1", "egg2", "egg3", };
+    cout << eggs[0] <<endl;
+    cout << eggs[1] <<endl;
+    cout << eggs[2] <<endl;
+    cout << eggs[3] <<endl;
+    eggs[2] = "egg7";
+    cout << eggs[2] << endl;
+    
+}
+--------------------------------------------------------------------------------------
+#include <iostream>
+#include <math.h>
 
+using namespace std;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+int main() {
+    
+    const char *eggs[] = {"egg0", "egg1", "egg2", "egg3", };
+    for ( int i = 0 ; i<4; i++){
+        cout << eggs[i] << endl;
+    }
+    
+}
+--------------------------------------------------------------------------------------
 
 
