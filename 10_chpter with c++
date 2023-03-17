@@ -325,5 +325,49 @@ int main() {
     
 }
 --------------------------------------------------------------------------------------
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+struct Student(보여진다)
+{
+    private: // 열려있는 struct를 열어줌(은닉)
+	const char* name;
+	int age;
+};
+// class Student(막는다)
+// {
+// public: // 막고있는 class를 열어줌(들어낸다.)
+// 	const char* name;
+// 	int age;
+// };
+int main(void) {
+	Student s2 = { "bred", 21};
+	Student s3 = { "jane", 24 };
+	cout << s2.name<< endl;
+	cout << s2.age<< endl;
+	cout << s3.name<< endl;
+	cout << s3.age<< endl;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
