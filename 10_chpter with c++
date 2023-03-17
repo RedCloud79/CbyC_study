@@ -377,17 +377,30 @@ int main(void) {
 	cout << getAge(&s3) << endl;
 }
 -----------------------------------------------------------------------------------
+#include <iostream>
+#include <math.h>
 
+using namespace std;
 
-
-
-
-
-
-
-
-
-
+class Student
+{
+    public:
+    //멤버 변수
+	const char* name;
+	int age;
+	//멤버 함수
+    const char * getName() {return this->name;}
+    int getAge() {return this->age;}
+    void setAge(int newAge) {this->age = newAge;}
+};
+int main(void) {
+	Student s3 = { "jane", 24 };
+	cout << s3.getName() << endl;
+	cout << s3.getAge() << endl;
+	s3.setAge(s3.getAge() + 1);
+	cout << s3.getAge() << endl;
+}
+-----------------------------------------------------------------------------------
 
 
 
