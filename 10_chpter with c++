@@ -202,15 +202,84 @@ int main() {
     cout<< 'a' << endl;
 }
 ---------------------------------------------------------------------------------------
+#include <iostream>
+#include <math.h>
 
+using namespace std;
 
+int main() {
+    
+    cout<< 3+4 << endl;
+    cout<< 3-4 << endl;
+    cout<< 3*4 << endl;
+    cout<< 3/4 << endl;
+    cout<< 3.0/4 << endl;
+    cout<< 3%4 << endl;
+    cout<< pow(3,4) << endl;
+}
+-----------------------------------------------------------------------------------------
+- 우선순위로 인해 ()를 해줘야한다.
+#include <iostream>
+#include <math.h>
 
+using namespace std;
 
+int main() {
+    
+    cout<< (3>4) << endl;
+    cout<< (3>=4) << endl;
+    cout<< (3<4) << endl;
+    cout<< (3<=4) << endl;
+    cout<< (3==4) << endl;
+    cout<< (3!=4) << endl;
+    
+}
+----------------------------------------------------------------------------------------
+#include <iostream>
+#include <math.h>
 
+using namespace std;
 
+int main() {
+    
+    cout<< (3>4 && 5>6) << endl;
+    cout<< (3<4 && 5<6) << endl;
+    cout<< (3>4 || 5>6) << endl;
+    cout<< (3<4 || 5<6) << endl;
+    cout<< (!(3<4)) << endl;
+    cout<< (!(3>4)) << endl;
+    
+}
+------------------------------------------------------------------------------------------
+#include <iostream>
+#include <math.h>
 
+using namespace std;
 
+int main() {
+    
+    int a = 3;
+    int b = 4;
+    cout << a+b <<endl;
+    int c = a+b;
+    cout << c <<endl;
+    
+}
+------------------------------------------------------------------------------------------
+#include <iostream>
+#include <math.h>
 
+using namespace std;
+
+int main() {
+    
+    int age = 23;
+    if (age >= 19){
+        cout<<age<<endl;
+    }
+    
+}
+------------------------------------------------------------------------------------------
 
 
 
