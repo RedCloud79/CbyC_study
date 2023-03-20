@@ -127,10 +127,79 @@ int main() {
     
 }
 -------------------------------------------------------------------------------------
+//자바 Cat (위에와 동일한 동작을 하는코드)
+class Cat {
+    private int itsAge;
+    private String name;
+    public Cat(int initialAge,String name) {
+        System.out.println("Cat 데이터 생성"+name);
+        itsAge=initialAge;
+        this.name = name;
+    }
+    public int GetAge() {return itsAge;}
+    public void SetAge(int age){itsAge=age;}
+    public void Meow(){System.out.println("Meow");}
+}
+public class MyClass {
+    public static void main(String args[]) {
+      Cat theCat = new Cat(7,"Tom's Friend");
+    }
+}
+------------------------------------------------------------------------------------
+# const 멤버 함수 = get쪽에 붙는다.
+- 상수함술(상수안쪽에서 변수를 안바꾸는 것) 선언된다.
+#include <iostream>
 
+using namespace std;
 
+struct Student{ // class Student
+                // public:  위와 같은 class이 형태로 변경 가능
+    int age;
+    int getAge() const {return this->age;}
+    void setAge(int newAge){
+    this->age = newAge;}
+};
+int main(void) {
+   Student s3 = { 24 };
+   cout << s3.getAge() << endl;
+   s3.setAge(s3.getAge() + 1);
+   cout << s3.getAge() << endl;
+}
+-----------------------------------------------------------------------------------
+# 포인터
+- 자유 저장 영역(malloc)에 있는 데이터 관리
+- new 키워드를 사용하여 자유 저장영역에 메모리를 할당가능.
+- new는 객체 생성용 함수
+- delete 객체를 없앨 때 사용한다.
 
+#include <iostream>
 
+using namespace std;
+
+int main(void) {
+   int localVariable = 5;
+   int *pLocal = &localVariable;
+   int*pHeap = new int;
+   if(pHeap == NULL){
+       cout<<"Error! No memory for pHeap!!!";
+       return 0;
+   }
+   *pHeap = 7;
+   cout << "localVariable: " << localVariable << endl;
+   cout << "*pLocal" << *pLocal << endl;
+   cout << "*pHeap" << *pHeap << endl;
+   delete pHeap;
+   pHeap = new int;
+   if(pHeap == NULL){
+       cout << "Error! No memory for pHeap!!!";
+       return 0;
+   }
+   *pHeap = 9;
+   cout << "*pHeap: " << *pHeap << endl;
+   delete pHeap;
+   return 0;
+}
+--------------------------------------------------------------------------------
 
 
 
