@@ -274,8 +274,74 @@ int main(void){
     //cout << pRect[1].getlength()<<endl;
 }
 --------------------------------------------------------------------------------
+# 참조자
+- 참조를 만드는 방법 : 대상 개체의 형을 적고 참조 연산자(&)와 참조의 이름으 적으면 된다.
+ex : int&rSomeRef = somelnt
 
+#include <iostream>
 
+using namespace std;
+
+int main() {
+    // 포인터
+    int i =3;
+    int*p = &i
+    cout << &i << " " <<p,,endle;
+    //int* p = new int(3); cout << p << endl;
+    p++; cout << p << endl; //증감
+    p+1; cout << p+1 << endl; //오프셋
+    p; cout << p << endl; // 값, p=p+1
+    &p; cout << &p << endl; // 주소값
+    *p; cout << *(p-1) << endl; // 접근연산, p[0]
+    
+    int i = 4;
+    int & r = i; //r = 주소값
+    cout << i <<endl;
+    cout << r <<endl;
+    r++; cout << i << " " <<r<< endl;
+    r+1; cout << i << " " << r << endl;
+    r; cout << i << " " << r << endl;
+    &r; cout << &i << " " << &r << endl;
+    
+}
+-------------------------------------------------------------------------------------
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    // 포인터
+    int i =3;
+    int* p = &i;
+    cout << &i << " : " << i  << endl;
+    cout << &p << " : " << p << endl;
+    cout << &i+1 << " : " <<(int *)*(&i+1)<<endl;
+    
+    //참조자
+    int i =3;
+    int& r = i;
+    cout << &i << " : " << i  << endl;
+    cout << &r << " : " << r << endl; // == cout << &i << " : " << i  << endl; 와 같은 값을 가진다.
+    cout << &i+1 << " : " <<(int *)*(&i+1)<<endl; // p의 값을 알기위한 값
+    
+    int* p = new int(3); cout << p << endl;
+    p++; cout << p << endl; //증감
+    p+1; cout << p+1 << endl; //오프셋
+    p; cout << p << endl; // 값, p=p+1
+    &p; cout << &p << endl; // 주소값
+    *p; cout << *(p-1) << endl; // 접근연산, p[0]
+    
+    int i = 4;
+    int & r = i; //r = 주소값
+    cout << i <<endl;
+    cout << r <<endl;
+    r++; cout << i << " " <<r<< endl;
+    r+1; cout << i << " " << r << endl;
+    r; cout << i << " " << r << endl;
+    &r; cout << &i << " " << &r << endl;
+    
+}
+------------------------------------------------------------------------------------
 
 
 
