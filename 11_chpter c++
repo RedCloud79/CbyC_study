@@ -317,12 +317,25 @@ int main() {
     cout << &p << " : " << p << endl;
     cout << &i+1 << " : " <<(int *)*(&i+1)<<endl;
     
+    int i=3;
+    int* p = &i;
+    printf("%#012x:%#d\n", &i, i);
+    printf("%#012x:%#012x\n", &p, p);
+    printf("%#012x:%#012x\n", &i+1, *(&i+1));
+
+    
     //참조자
     int i =3;
     int& r = i;
     cout << &i << " : " << i  << endl;
     cout << &r << " : " << r << endl; // == cout << &i << " : " << i  << endl; 와 같은 값을 가진다.
     cout << &i+1 << " : " <<(int *)*(&i+1)<<endl; // p의 값을 알기위한 값
+    
+    int i = 3;
+    int &r = i;
+    printf("%#012x:%#d\n", &i, i);
+    printf("%#012x:%#012x\n", &r, r);
+    printf("%#012x:%#012x\n", &i+1, *(&i+1));
     
     int* p = new int(3); cout << p << endl;
     p++; cout << p << endl; //증감
