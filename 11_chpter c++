@@ -275,7 +275,7 @@ int main(void){
 }
 --------------------------------------------------------------------------------
 # 참조자
-- 참조를 만드는 방법 : 대상 개체의 형을 적고 참조 연산자(&)와 참조의 이름으 적으면 된다.
+- 참조를 만드는 방법 : 대상 개체의 형을 적고 참조 연산자(&)와 참조의 이름을 적으면 된다.
 ex : int&rSomeRef = somelnt
 
 #include <iostream>
@@ -355,6 +355,44 @@ int main() {
     
 }
 ------------------------------------------------------------------------------------
+ex : 포인터의 형태
+
+#include <iostream>
+
+using namespace std;
+
+struct Student {
+    int age;
+};
+int getAge(const Student* inst) {return inst->age;}
+void setAge(Student* inst, int newAge) {inst->age = newAge;}
+int main(void) {
+   Student s3 = { 24 };
+   cout << getAge(&s3) << endl;
+   setAge(&s3, getAge(&s3) + 1);
+   cout << getAge(&s3) << endl;
+}
+
+
+ex : 참조자의 형태
+
+#include <iostream>
+
+using namespace std;
+
+struct Student {
+    int age;
+};
+int getAge(const Student& inst) {return inst.age;}
+void setAge(Student& inst, int newAge) {inst.age = newAge;}
+
+int main(void) {
+   Student s3 = { 24 };
+   cout << getAge(s3) << endl; // const Studnet & inst = s3
+   setAge(s3, getAge(s3) + 1);
+   cout << getAge(s3) << endl;
+}
+-------------------------------------------------------------------------------------
 
 
 
