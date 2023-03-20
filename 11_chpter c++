@@ -224,12 +224,56 @@ int main(void) {
    return 0;
 }
 ---------------------------------------------------------------------------------
+# const 포인터
+- 형 앞이나 형뒤, 또는 양쪽에 모두 사용할 수 있다.
+- const int * pOne; => 상수 정수에 대한 포인터 (읽기만 할때 사용) 
 
+#include <iostream>
 
+using namespace std;
+void print(const int* pOne){
+    cout << pOne[0] << " " << pOne[1]<< endl;
+    //pOne[0]++;
+}
+void copy(int* pTwo, const int* pOne){ // pTwo 출력배열, pOne 입력배열
+    pTwo[0]=pOne[0];
+    pTwo[1]=pOne[1];
+    //pOne[1]++;
+}
+int main(void){
+    int* pOne = new int[5]; //&pOne[0]
+    pOne[0] = 1, pOne[1] = 2;
+    cout << pOne[0] << " " << pOne[1]<< endl;
+    print(pOne);
+    cout << pOne[0] << " " << pOne[1]<< endl;
+    int* pTwo = new int[5];
+    copy(pTwo,pOne); // pTwo<= pOne
+    print(pTwo); print(pOne);
+}
+-----------------------------------------------------------------------------------
+- int * const pTwo; => int값이 변경이 가능하지만, pTwo의 값의 변경은 안된다.(주소변수 말고 상수)
+@ pTwo++;, pTwo += 1; 을 사용하지 못한다. *(pTwo+1)<=> pTwo[1] 형태는 사용가능
 
+#include <iostream>
 
+using namespace std;
+class Rectange {
+    int Length;
+public:
+    Rectange(int len){Length = len;}
+    int getlength()const {return Length;}
+};
 
-
+int main(void){
+    //Rectange * const pRect = new Rectange(3);
+    Rectange& pRect = *new Rectange(3);
+    //cout << pRect->getlength()<<endl;
+    cout << pRect.getlength()<<endl;
+    //pRect ++;
+    //cout << (pRect+1)->getlength()<<endl;
+    //cout << pRect[1].getlength()<<endl;
+}
+--------------------------------------------------------------------------------
 
 
 
