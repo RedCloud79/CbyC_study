@@ -200,7 +200,30 @@ int main(void) {
    return 0;
 }
 --------------------------------------------------------------------------------
+#include <iostream>
 
+using namespace std;
+class SimpleCat {
+public:
+    SimpleCat() {itsAge = new int(2); itsWeight = new int(5);}
+    ~SimpleCat() {delete itsAge; delete itsWeight;}
+    int GetAge() const {return *itsAge;}
+    void SetAge(int age) {*itsAge = age;}
+    int GetWeight() const {return *itsWeight;}
+    void SetWeight(int Weight) {*itsWeight = Weight;}
+private:
+    int * itsAge;
+    int * itsWeight;
+};
+int main(void) {
+   SimpleCat *Frisky = new SimpleCat;
+   cout <<"Frisky is"<<Frisky->GetAge() <<"year old \n";
+   Frisky->SetAge(5);
+   cout <<"Frisky is"<<Frisky->GetAge() <<"year old \n";
+   delete Frisky;
+   return 0;
+}
+---------------------------------------------------------------------------------
 
 
 
