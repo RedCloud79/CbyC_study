@@ -1,1 +1,70 @@
+#include <iostream>
+
+using namespace std;
+void f1 (int* ia){
+    cout << ia[0]++ << endl; // 배열받고, 읽고쓰기 / *(ia+0)
+}
+void f2 (double (*daa)[3]){
+    cout << (daa[0][0]+=0.1) << endl;//(*(*daa+0)+1)
+}
+void f3 (const char **cpa){
+    cout << cpa[0] << endl;
+}
+typedef struct {
+    const char CPU[32];
+}Computer;
+void f4 (Computer * pCom){
+    cout << pCom -> CPU << endl;
+}
+void f5 (Computer & rCom){
+    cout << rCom.CPU << endl;
+} // 6룡
+class AIComputer{
+public:
+    const char CPU[32];
+};
+void f6(AIComputer& rAIcom){
+    cout << rAIcom.CPU << endl;
+}
+int main() {
+    //1. 1차 배열 -> 함수 -> 1차 포인터
+    int ia[5] = {1,2,3,4,5}; //배열 만들기
+    f1(ia); //배열 넘기기
+    //2. 2차 배열 -> 함수 -> 배열 포인터
+    double daa[2][3] = {0.1,0.2,};
+    f2(daa);
+    //3. 포인터 배열 -> 함수 -> 2차 포인터
+    const char* cpa[2] = {"hello", "world"};
+    f3 (cpa);
+    //4. 구조체 주소 -> 함수 -> 구조체 포인터
+    Computer myCom = {"i7-12th"};
+    f4(&myCom); // 구조체를 줄때는 &인 주소값으로 할당
+    f5(myCom); //C++의 시대, 조선시대의 시작
+    //5. 객체 -> 함수 -> 객체 레퍼런스(객체별명)
+    AIComputer myAIcom = {"i7-13th AI"};
+    f6(myAIcom);
+    
+}
+------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
