@@ -212,6 +212,50 @@ int main() {
 // operator overloading!
 -------------------------------------------------------------------------------------
 
+#include <iostream>
+
+using namespace std;
+class Int {
+    int value;
+public:
+    Int():value(0){}
+    Int(int num):value(num){}
+    Int(const Int& Num):value(Num.value){}
+    int getValue(){return value;}
+    Int operator+(const Int& j) const {
+        Int tmp(value+j.value);
+        return tmp;
+    }
+    Int ADD(const Int& j) const {
+        Int tmp(this -> value+j.value);
+        return tmp;
+    }
+    const Int& operator += (const Int& j){
+        this -> value += j.value;
+        return *this;
+    }
+};
+int main() {
+    Int i;
+    cout << i.getValue() << endl;
+    Int j=3;//Int j(3)
+    cout << j.getValue() <<endl;
+    Int k=j; //Int k(j)
+    cout << k.getValue() <<endl;
+    k = i+j;
+    cout << k.getValue() << endl;
+    //i.operator+(j); // i+j;와 같은 방식
+    //cout << m.getValue() <<endl;
+    k=i.ADD(j);
+    cout << k.getValue() << endl;
+    k = i += j;//i=i+j, i.operator+=(j)
+    cout << i.getValue() << endl;
+    int a=3;
+    int b=4;
+    int c=0;
+    c = a += b;
+    cout << c <<endl;
+}
 
 
 
