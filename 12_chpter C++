@@ -112,8 +112,105 @@ int main() {
     cout << "rCat is " << age << " years old!" << endl;
 }
 ------------------------------------------------------------------------------------
-# 연산자 오버로딩(멤버 함수 중첩)
+#include <iostream>
 
+using namespace std;
+
+class SimpleCat{
+public:
+    SimpleCat(int age, int weight);
+    ~SimpleCat() {}
+    int GetAge() {return itsAge;}
+    int GetWeight() {return itsWeight;}
+private:
+    int itsAge;
+    int itsWeight;
+};
+
+SimpleCat::SimpleCat(int age, int weight):
+itsAge(age), itsWeight(weight){}
+
+SimpleCat & TheFunction(){
+    SimpleCat * pFrisky = new SimpleCat(5,9);
+    cout << "pFrisky: " << pFrisky << endl;
+    return *pFrisky;
+}
+
+int main() {
+    SimpleCat & rCat = TheFunction();
+    int age = rCat.GetAge();
+    cout << "rCat is " << age << " years old!" << endl;
+    SimpleCat * pCat = &rCat;
+    delete pCat;
+    return 0;
+}
+-------------------------------------------------------------------------------------
+# 복사 생성자
+- 기본 생성자와 소멸자에 추가하여 컴파일러는 기본 복사 생성자를 제공한다.
+#include <iostream>
+
+using namespace std;
+
+class SimpleCat {
+    string name;
+public:
+    Simplecat():name("no name"){} //***
+    SimpleCat(string name):name(name){//***
+        cout << "New "<< (this -> name = name) << endl;
+    }
+    SimpleCat(const SimpleCat& rCat){
+        
+        cout << "Copy " << (name = rCat.name) << endl;
+    }
+    ~SimpleCat() {//***
+        cout << "Del " << name << endl;
+    }
+    
+};
+SimpleCat& f1(SimpleCat &psc){
+    return psc;
+} // SimpleCat tsc = psc 복사 생성자 2번생성
+SimpleCat* f2(SimpleCat* psc){
+    return psc;
+}
+int main() {
+    SimpleCat sc("Frisky"); //New
+    SimpleCat* psc = new SimpleCat("Tom"); //New
+    SimpleCat& rsc = *new SimpleCat("Tom's friend"); //New
+    SimpleCat sc_2 = sc; // SimpleCat sc_2(sc); / copy
+    SimpleCat sc_3(rsc); // copy
+    SimpleCat& sc_4 = f1(sc_2); //SimpleCat psc = sc
+    SimpleCat* sc_5 = f2(&sc);
+    
+    delete psc;
+    delete &rsc;
+}
+------------------------------------------------------------------------------------
+# 연산자 오버로딩
+
+#include <iostream>
+
+using namespace std;
+class Cat {
+    
+};
+int main() {
+    Cat c1;
+    Cat c2;
+    Cat c3;
+    c3 = c1 + c2;
+    c3[1];
+    c3 << c2;
+    c3++;
+}
+// +,-,,/,%
+// >,<,>=,<=,==,!=
+// ||, &&, !
+// >>, <<, &, |, ^, ~
+// []
+// ++, +=, -=
+// operator overloading!
+-------------------------------------------------------------------------------------
 
 
 
