@@ -256,6 +256,188 @@ int main() {
     c = a += b;
     cout << c <<endl;
 }
+----------------------------------------------------------------------------------
+#include <iostream>
+
+using namespace std;
+
+class CAT{
+public:
+    CAT(){
+        itsAge = 1; itsWeight = 5;
+    }
+    ~CAT() {}int GetAge() const{return itsAge;}
+    int GetWeight() const { return itsWeight;}
+    void SetAge(int age){itsAge = age;}
+private:
+    int itsAge;
+    int itsWeight;
+};
+int main() {
+    CAT Litter[5];
+    int i;
+    for (i = 0; i <5; i++){
+        for (i=0; i<5; i++)Litter[i].SetAge(2*i +1);
+    }
+    for (i=0; i<5; i++){
+        cout << "Cat#"<<i+1<<":";
+        cout << Litter[i].GetAge() << endl;
+    }
+    return 0;
+}
+-----------------------------------------------------------------------------------
+#include <iostream>
+
+using namespace std;
+
+class CAT{
+public:
+    CAT(){
+        itsAge = 1; itsWeight = 5;
+    }
+    ~CAT() {}int GetAge() const{return itsAge;}
+    int GetWeight() const { return itsWeight;}
+    void SetAge(int age){itsAge = age;}
+private:
+    int itsAge;
+    int itsWeight;
+};
+int main() {
+    CAT * Family[500];
+    int i;
+    CAT * pCat;
+    for (i = 0; i <5; i++){
+        pCat = new CAT;
+        pCat -> SetAge(2*i +1);
+        Family[i] = pCat;
+    }
+    for (i=0; i<5; i++){
+        cout << "Cat#"<<i+1<<":";
+        cout << Family[i]->GetAge() << endl;
+    }
+    return 0;
+}
+------------------------------------------------------------------------------------
+#include <iostream>
+
+using namespace std;
+
+class CAT{
+public:
+    CAT(){
+        itsAge = 1; itsWeight = 5;
+    }
+    ~CAT() {}int GetAge() const{return itsAge;}
+    int GetWeight() const { return itsWeight;}
+    void SetAge(int age){itsAge = age;}
+private:
+    int itsAge;
+    int itsWeight;
+};
+int main() {
+    CAT * Family = new CAT[500];
+    int i;
+    CAT * pCat;
+    
+    for (i = 0; i <500; i++){
+        pCat = new CAT;
+        pCat -> SetAge(2*i +1);
+        Family[i] = *pCat;
+        delete pCat;
+    }
+    for (i=0; i<500; i++){
+        cout << "Cat#"<<i+1<<":";
+        cout << Family[i].GetAge() << endl;
+    }
+    delete [] Family;
+    return 0;
+}
+------------------------------------------------------------------------------------
+#include <iostream>
+
+using namespace std;
+class CAT{};
+
+int main() {
+    int* ip = new int(3);
+    cout << *ip << endl;
+    delete ip;
+    int& ir=*new int(5);
+    cout << ir << endl;
+    delete ir;
+    int* ip2 = new int[5]{1,2,3,4,5};
+    cout << ip2[3] << endl;
+    delete [] ip2;
+    Cat& rc = *new Cat;
+    delete &rc;
+    Cat* pc = new Cat;
+    delete pc;
+    Cat* pca = new Cat[5];
+    delete [] pca;
+    return 0;
+}
+-----------------------------------------------------------------------------------
+- LapTop : CPU, Memory, Disk, LTKeyboard, LTMonitor, LTTouch
+- DeskTop : CPU, Memory, Disk, EXKeyboard, EXMonitor, EXMouse
+
+#include <iostream>
+
+using namespace std;
+class Computer{
+    string CPU; // i5-1235U (1.3GHz)
+    int Memory; // 16G
+    int Disk; // 256GB
+public:
+    Computer (string CPU, int Memory, int Disk):
+    CPU(CPU), Memory(Memory), Disk(Disk){}
+    string getCPU()const{return CPU;}
+    int getMemory()const{return Memory;}
+    int getDisk()const{return Disk;}
+};
+
+class LapTop : public Computer {
+    string LTKeyboard;// Laptop keyboard
+    string LTMonitor; // Laptop Monitor
+    string LTTouch; // Laptop thouch
+public:
+    LapTop(string CPU, int Memory, int Disk,string LTKeyboard,
+    string LTMonitor, string LTTouch):
+    Computer(CPU,Memory,Disk), LTKeyboard(LTKeyboard), LTMonitor(LTMonitor),
+    LTTouch(LTTouch){}
+    string getKeyboard() const {return LTKeyboard;}
+    string getMonitor() const {return LTMonitor;}
+    string getTouch() const {return LTTouch;}
+};
+// class DeskTop : public Computer {
+//     string EXKeyboard; // Desktop Keyboard
+//     string EXMonitor; // Desktop Monitor
+//     string EXMouse; // Desktop USB Mouse
+// };
+
+
+
+int main() {
+    Computer & myCom = 
+    *new Computer ("i5-1235U(1.3GHz)", 16, 256);
+    cout << myCom.getCPU() << ", "<<
+    myCom.getMemory() << ", "<< myCom.getDisk() << endl;
+    cout << "sizeof(myCom):" << sizeof(myCom) << endl;
+    delete &myCom;
+    
+    cout << sizeof(LapTop) << endl;
+    LapTop& myLapTop = *new LapTop("i9-13900HX (2.2GHz)", 16, 512, 
+                                    "LTKB", "LTMon", "LTTouch");
+    cout << myLapTop.getCPU() << ", "<<
+    myLapTop.getMemory() << ", "<< myLapTop.getDisk() <<
+    ", "<< myLapTop.getKeyboard() << ", "<< myLapTop.getMonitor() <<
+    ", "<< myLapTop.getTouch() << endl;
+    return 0;
+}
+---------------------------------------------------------------------------------
+
+
+
+
 
 
 
