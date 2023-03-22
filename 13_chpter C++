@@ -186,7 +186,50 @@ int main() {
     return 0;
 }
 ----------------------------------------------------------------------------------------
+#include <iostream>
 
+using namespace std;
+
+class USB { // interface
+public:
+    virtual void connect() = 0; // 순수 가상함수
+    virtual void read() = 0;
+};
+class USBDisk : public USB{
+public:
+    virtual void connect(){cout << "USB Disk 연결" << endl;}
+    virtual void read(){cout << "USB Disk 읽기" << endl;}
+};
+class USBMouse : public USB{
+public:
+    virtual void connect(){cout << "USB Mouse 연결" << endl;}
+    virtual void read(){cout << "USB Mouse 읽기" << endl;}
+};
+class USBWifi : public USB{
+public:
+    virtual void connect(){cout << "USB Wifi 연결" << endl;}
+    virtual void read(){cout << "USB Wifi 읽기" << endl;}
+};
+class DeskTop {
+    USB* usb0;
+    public:
+    DeskTop() {}
+    void connect(USB& rusb0){usb0 = &rusb0; usb0->connect(); usb0 -> read();}
+};
+
+int main() {
+    DeskTop& myDeskTop = *new DeskTop();
+    USBDisk& myUSBDisk = *new USBDisk();
+    myDeskTop.connect(myUSBDisk);
+    USBMouse& myUSBMouse = *new USBMouse();
+    myDeskTop.connect(myUSBMouse);
+    USBWifi& myUSBWifi = *new USBWifi();
+    myDeskTop.connect(myUSBWifi);
+    delete & myUSBDisk;
+    delete & myDeskTop;
+    return 0;
+}
+---------------------------------------------------------------------------------------
 
 
 
