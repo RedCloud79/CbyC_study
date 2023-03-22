@@ -62,11 +62,18 @@ int main() {
 using namespace std;
 enum BREED { YORKIE, CAIRN, DANDIE, SHETLAND, DOBERMAN, LAB};
 class Mammal{
+private: // Mammal 내부에서만 값이 확인된다.
+    int itsAge;
+protected:
 public:
     int itsAge;
     //void getAge(){itsAge;}
 };
-class Dog : public Mammal { //public 상속
+class Dog : public Mammal { //public 상속 , private에는 접근이 불가하다.
+    void getAge(){itsAge;}
+};
+
+class Dog : private Mammal { //
     void getAge(){itsAge;}
 };
 
@@ -75,7 +82,8 @@ int main() {
     m.itsAge;
 }
 --------------------------------------------------------------------------------------
-# 함수 재생
+# 함수 재생 (Overriding Function)
+- 함수를 똑같이 선언해서 막아버리는 방식
 #include <iostream>
 
 using namespace std;
