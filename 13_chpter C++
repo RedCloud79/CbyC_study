@@ -151,6 +151,52 @@ int main() {
     return 0;
 }
 ---------------------------------------------------------------------------------------
+# overloading(중첩), overriding(중첩)
+- 중첩 : 같은 이름을 가지고 메쏘드를 만든다는 것.
+- 재생 : 파생 클래스에서 베이스 클래스와 같은 이름, 같은 원형부르르 가진 메소드를 만듦.
+
+#include <iostream>
+
+using namespace std;
+
+class Mammal{
+public:
+    void Move() const {cout << "Mammal move on step" << endl;}
+    void Move(int distance) const{
+        cout << "Mammal move";
+        cout << distance << "_steps." << endl;
+    }
+protected:
+    int itsAge;
+    int itsWeight;
+};
+class Dog : public Mammal{
+public:
+    void Move() const { 
+        cout << "Dog move 5 steps." << endl;
+        //Mammal::Move(3);
+};
+int main() {
+    Mammal bigAnimal;
+    Dog fido;
+    bigAnimal.Move();
+    bigAnimal.Move(2);
+    fido.Move();
+    //fido.Mammal::Move(6);
+    return 0;
+}
+----------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
 
 
 
