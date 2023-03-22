@@ -62,20 +62,53 @@ int main() {
 using namespace std;
 enum BREED { YORKIE, CAIRN, DANDIE, SHETLAND, DOBERMAN, LAB};
 class Mammal{
-private: // Mammal 내부에서만 값이 확인된다.
-    int itsAge;
-protected:
-public:
-    int itsAge;
+private: int ix; // Mammal 내부에서만 값이 확인된다.
+protected: int ipr;
+public: int ipu;
     //void getAge(){itsAge;}
 };
 class Dog : public Mammal { //public 상속 , private에는 접근이 불가하다.
     void getAge(){itsAge;}
 };
 
-class Dog : private Mammal { //
+class Dog{
+private: int ix; // 접근 불가영역
+protected: int ipr; // protected : int ipr;
+public: int ipu; // public : int ipu;
+
+private: int dx;
+protected: int dpr;
+public : int dpu;
+}
+
+class Dog : protected Mammal { //
     void getAge(){itsAge;}
 };
+
+class Dog{
+private: int ix; // 접근 불가영역
+protected: int ipr; // protected : int ipr;
+public: int ipu; // protected : int ipu;
+
+private: int dx;
+protected: int dpr;
+public : int dpu;
+}
+
+class Dog : private Mammal { //
+    private: int dx;
+    protected: int dpr;
+    public : int dpu;
+};
+class Dog{
+private: int ix; // 접근 불가영역
+protected: int ipr; // private : int ipr;
+public: int ipu; // private : int ipu;
+
+private: int dx;
+protected: int dpr;
+public : int dpu;
+}
 
 int main() {
     Mammal m;
