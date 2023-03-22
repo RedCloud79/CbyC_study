@@ -503,9 +503,152 @@ int main() {
 - pPeg->GetColor(); 을 호출하면 컴파일러는 Horse,Bird 클래스 GetColor중 어떤것을 호출하는 애매 모호하게된다.
 - pPeg -> Horse::Getcolor(), pPeg -> Bird::Getcolor() 와 같이 사용한다.
 
+class Animal { int a; virtual void f(); }; // a
+class Horse : virtual public Animal {int h; }; //a|h
+class Bird : virtual public Animal {int b;}; // a|b
+class Pegasus : public Horse, public Bird { int h; };
+//a|h|a|b|h
+// virtual은 포인터이다.
 
+1>main.cpp
+1>class Pegasus	size(56):
+1>	+---
+1> 0	| +--- (base class Horse)
+1> 0	| | {vbptr}
+1> 8	| | h
+1>  	| | <alignment member> (size=4)
+1>	| +---
+1>16	| +--- (base class Bird)
+1>16	| | {vbptr}
+1>24	| | b
+1>  	| | <alignment member> (size=4)
+1>	| +---
+1>32	| h
+1>  	| <alignment member> (size=4)
+1>	+---
+1>	+--- (virtual base Animal)
+1>40	| {vfptr}
+1>48	| a
+1>  	| <alignment member> (size=4)
+1>	+---
+1>Pegasus::$vbtable@Horse@:
+1> 0	| 0
+1> 1	| 40 (Pegasusd(Horse+0)Animal)
+1>Pegasus::$vbtable@Bird@:
+1> 0	| 0
+1> 1	| 24 (Pegasusd(Bird+0)Animal)
+1>Pegasus::$vftable@:
+1>	| -40
+1> 0	| &Animal::f
+1>vbi:	   class  offset o.vbptr  o.vbte fVtorDisp
+1>          Animal      40       0       4 0
+---------------------------------------------------------------------------------------
+# 추상 자료형 - 구체화 되지 않는 자료형
+# 순수 가상 함수 - (virtual void Dras() = 0;) 와 같은 형태를 지니고 있다.
+객체를 만들지 못하고, 파생만 된다. 파생된곳에서 정의를 해줘야 한다.
 
+#include <iostream>
 
+using namespace std;
+
+enum BOOL { FALSE, TRUE };
+
+class Shape{
+public:
+    Shape(){}
+    ~Shape(){}
+    virtual long GetArea() = 0; // error
+    virtual long GetPerim()= 0;
+    virtual void Draw() = 0;
+private:
+};
+void Shape::Draw() {cout << "Abstract drawing mechanism!\n";}
+class Circle : public Shape {
+public:
+    Circle(int radius):itsRadius(radius){}
+    ~Circle(){}
+    long GetArea() { return 3 * itsRadius * itsRadius; }
+    long GetPerim() { return 9 * itsRadius; }
+    void Draw();
+private:
+int itsRadius; int itsCircumference;
+};
+
+void Circle::Draw()
+{
+    cout << "Circle drawing routine here!\n";
+    Shape::Draw();
+}
+class Rectangle : public Shape
+{
+public:
+    Rectangle(int len, int width):
+    itsLength(len), itsWidth(width){}
+    ~Rectangle(){}
+    long GetArea() { return itsLength * itsWidth; }
+    long GetPerim() {return 2*itsLength + 2*itsWidth; }
+    virtual int GetLength() { return itsLength; }
+    virtual int GetWidth() { return itsWidth; }
+    void Draw();
+private:
+    int itsWidth;
+    int itsLength;
+};
+void Rectangle::Draw()
+{
+    for (int i = 0; i<itsLength; i++)
+    {
+        for (int j = 0; j<itsWidth; j++)
+                cout << "x ";
+        cout << "\n";
+    }
+    Shape::Draw();
+}
+class Square : public Rectangle
+{
+public:
+    Square(int len);
+    Square(int len, int width);
+    ~Square(){}
+    long GetPerim() {return 4 * GetLength();}
+};
+Square::Square(int len):
+Rectangle(len,len)
+{}
+Square::Square(int len, int width):
+Rectangle(len,width)
+{
+    if (GetLength() != GetWidth())
+    cout << "Error, not a square... a Rectangle??\n";
+}
+
+int main() {
+    int choice;
+    BOOL fQuit = FALSE;
+    Shape * sp;
+    while (1)
+    {
+        cout << "(1)Circle (2)Rectangle (3)Square (0)Quit: ";
+        cin >> choice;
+        switch (choice)
+        {
+        case 1: sp = new Circle(5);
+                    break;
+        case 2: sp = new Rectangle(4,6);
+                    break;
+        case 3: sp = new Square (5);
+                    break;
+        default: fQuit = TRUE;
+                    break;
+        }
+        if (fQuit)
+                    break;
+        sp->Draw();
+        cout << "\n";
+        }
+        return 0;
+}
+----------------------------------------------------------------------------------------
 
 
 
