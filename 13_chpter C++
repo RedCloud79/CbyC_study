@@ -57,8 +57,59 @@ int main() {
 - 상속 : public(0), protected(사용x), private(사용잘x)
 - protected : 상속에서 사용
 
+#include <iostream>
 
+using namespace std;
+enum BREED { YORKIE, CAIRN, DANDIE, SHETLAND, DOBERMAN, LAB};
+class Mammal{
+public:
+    int itsAge;
+    //void getAge(){itsAge;}
+};
+class Dog : public Mammal { //public 상속
+    void getAge(){itsAge;}
+};
 
+int main() {
+    Mammal m;
+    m.itsAge;
+}
+--------------------------------------------------------------------------------------
+# 함수 재생
+#include <iostream>
+
+using namespace std;
+enum BREED { YORKIE, CAIRN, DANDIE, SHETLAND, DOBERMAN, LAB};
+
+class Mammal{
+public:
+    Mammal(){cout<<"Mammal constructor..." << endl;}
+    ~Mammal() {cout<< "Mammal destructor..." << endl;}
+    void Speak()const { cout<< "Mammal sound!" << endl;}
+    void sleep()const { cout<< "shhh. I'm sleeping" << endl;}
+protected:
+    int itsAge;
+    int itsWeight;
+};
+class Dog : public Mammal{
+public:
+    Dog() {cout << "Dog constructor..." << endl;}
+    ~Dog() {cout << "Dog destructor..." << endl;}
+    void WagTail() { cout << "Tail wagging..." << endl;}
+    void BegForFood() { cout << "Begging for good..." << endl;}
+    void Speak()const{cout << "Woof!" << endl;}
+private:
+    BREED itsBredd;
+};
+
+int main() {
+    Mammal bigAnimal;
+    Dog fido;
+    bigAnimal.Speak();
+    fido.Speak();
+    return 0;
+}
+---------------------------------------------------------------------------------------
 
 
 
