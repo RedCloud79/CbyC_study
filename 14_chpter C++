@@ -245,5 +245,16 @@ int main() {
 	rabbit.eat(cabbage);
 }
 --------------------------------------------------------------------------------------
+class SimpleFCN {};
 
+int main() {
+	SimpleFCN& fcn = *new SimpleFCN();
+	fcn.forward();
+	fcn.activation();
+	fcn.mse();
+	fcn.backward();
+	fcn.deactivation();
+	fcn.learning();
+}
+--------------------------------------------------------------------------------------
 
