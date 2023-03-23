@@ -157,10 +157,94 @@ int main() {
        f3(ipa); //void f3(int* ipa[3]) // int* ipa[] => int **ipa
 }
 --------------------------------------------------------------------------------------
+# stack = 마지막에 넣은것부터 다시 꺼낼수 있다.(Last in first out)
+# Q(큐) = 처음에 넣은것부터 다시 꺼낼수 있다.(first in first out)
+
+#include <iostream>
+
+using namespace std;
+class Stack {
+	int* stack;
+	int size;
+	int top;
+public:
+	Stack(int size) : size(size) {
+		stack = new int[size] {0};
+		top = 0;
+	}
+	~Stack() { delete stack; }
+	void Push(int data) {
+		if (top < size) {
+			stack[top] = data;
+			top++;
+		}
+		else { cout << "Stack full!" << endl; }
+	}
+	void Show() const {
+		for (int i = top; i >= 0; i--) {
+			cout << stack[i] << endl;
+		}
+	}
+	int Pop() { 
+		if (top > 0) {
+			top--;
+			return stack[top];
+		}
+		else {
+			cout << "Stack Enpty" << endl;
+			return -1;
+		} 
+	}
+};
+int main() {
+	Stack& stack = *new Stack(1024);
+	for (int data = 111; data < 130; data++) {
+		stack.Push(data);
+	}
+	stack.Show();
+	while (true) {
+		int data = stack.Pop();
+		if (data == -1) {break;}
+		cout << data << endl;
+	}
+}
+-----------------------------------------------------------------------------------
+#include <iostream>
+
+using namespace std;
+
+class Vegetable {
+public:
+	virtual string getName() = 0;
+};
+class carrot : public Vegetable{
+public:
+	virtual string getName() { return "carrot"; }
+};
+class Cabbage : public Vegetable {
+public:
+	virtual string getName() { return "cabbange"; }
+};
+class Rabbit {
+	string name;
+public:
+	Rabbit(string name) : name(name) {}
+	void run() const { cout << "runs" << endl; }
+	void sleep() const { cout << "sleeps" << endl; }
+	void eat(Vegetable& veg) const { cout<< name << "eats " << veg.getName() << endl; }
+};
 
 
-
-
+int main() {
+	Rabbit& rabbit = *new Rabbit("Judy");
+	rabbit.run();
+	rabbit.sleep();
+	Vegetable& Carrot = *new carrot();
+	rabbit.eat(Carrot);
+	Vegetable& cabbage = *new Cabbage();
+	rabbit.eat(cabbage);
+}
+--------------------------------------------------------------------------------------
 
 
 
