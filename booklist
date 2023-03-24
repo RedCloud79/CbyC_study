@@ -16,8 +16,8 @@
 using namespace std;
 
 struct Book {
-	char* title;//도서명
-	char* author;// 저자
+	char* title[50];//도서명
+	char* author[50];// 저자
 };
 void structPrn(Book book);
 void structinput(Book* book);
