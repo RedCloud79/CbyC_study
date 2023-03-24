@@ -48,6 +48,7 @@ void read_file(Book* book) { //파일을 읽어 도서배열에 저장하는 함
 	char* str = (char*)malloc(50);
 	char* str2 = (char*)malloc(50);
 	int cnt = 0;
+	int len;
 	while (1) {
 		if (fgets(str, 50, pFile) == NULL) break;;//제목
 		len = strlen(str);
